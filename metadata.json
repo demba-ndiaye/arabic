@@ -1,0 +1,8 @@
+{
+  "name": "Arabic - Learn & Explore Arabic Language",
+  "description": "Comprehensive Arabic language learning platform featuring the 28 alphabet letters, positional forms, harakat vowels, trilateral root explorer, vocabulary flashcards, grammar guides, and interactive quizzes.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

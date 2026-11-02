@@ -1,0 +1,43 @@
+name: Build & Deploy to IONOS SFTP
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Récupération du code source (Checkout)
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Configuration de Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 📦 Installation des dépendances (Résiliente 1er push)
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci || npm install --legacy-peer-deps
+          else
+            npm install --legacy-peer-deps
+          fi
+
+      - name: 🔨 Compilation du projet pour la production
+        run: npm run build
+
+      - name: 🚀 Déploiement SFTP automatique sur IONOS (Port 22)
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 22
+          local_path: './dist/*'
+          remote_path: './'
+          sftp_only: true
+          sftpArgs: '-o ConnectTimeout=20 -o StrictHostKeyChecking=no'
+          delete_remote_files: false
