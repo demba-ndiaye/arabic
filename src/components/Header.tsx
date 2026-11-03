@@ -7,11 +7,12 @@ import {
   Flame, 
   Volume2, 
   CheckCircle2,
-  Scroll
+  Scroll,
+  Library
 } from 'lucide-react';
 import { UserProgress } from '../types/app';
 
-export type MainTab = 'reading' | 'texts' | 'vocab' | 'progress';
+export type MainTab = 'reading' | 'tomes' | 'texts' | 'vocab' | 'progress';
 
 interface HeaderProps {
   activeTab: MainTab;
@@ -35,6 +36,13 @@ export const Header: React.FC<HeaderProps> = ({
       sub: 'Entraînement', 
       arabic: 'قِرَاءَةٌ بِلا تَشْكِيل', 
       icon: BookOpen 
+    },
+    { 
+      id: 'tomes' as MainTab, 
+      label: 'Les 3 Tomes', 
+      sub: 'Bayna Yadayk 1-2-3', 
+      arabic: 'سِلْسِلَةُ الكُتُب', 
+      icon: Library 
     },
     { 
       id: 'texts' as MainTab, 

@@ -50,11 +50,22 @@ export const VocabularyHub: React.FC<VocabularyHubProps> = ({
   const [newTransliteration, setNewTransliteration] = useState('');
   const [newTranslationFr, setNewTranslationFr] = useState('');
   const [newRoot, setNewRoot] = useState('');
-  const [newCategory, setNewCategory] = useState<'Coranique' | 'Hadith' | 'Théologie' | 'Littérature' | 'Expression'>('Coranique');
+  const [newCategory, setNewCategory] = useState<'Coranique' | 'Hadith' | 'Théologie' | 'Littérature' | 'Expression' | 'Tome 1' | 'Tome 2' | 'Tome 3'>('Coranique');
   const [newExample, setNewExample] = useState('');
   const [newExampleTranslation, setNewExampleTranslation] = useState('');
 
-  const categories = ['Toutes', 'Coranique', 'Hadith', 'Théologie', 'Littérature', 'Expression', 'Mes Mots Ajoutés'];
+  const categories = [
+    'Toutes',
+    'Tome 3',
+    'Tome 2',
+    'Tome 1',
+    'Coranique',
+    'Hadith',
+    'Théologie',
+    'Littérature',
+    'Expression',
+    'Mes Mots Ajoutés'
+  ];
 
   const filteredWords = useMemo(() => {
     return words.filter((w) => {

@@ -31,14 +31,20 @@ export const TextLibrary: React.FC<TextLibraryProps> = ({
 
   const categories = [
     { id: 'all', label: 'Tous les textes', arabic: 'جَمِيعُ النُّصُوص' },
+    { id: 'tome3', label: 'Tome 3 (Bayna Yadayk)', arabic: 'الجزء الثالث' },
+    { id: 'tome2', label: 'Tome 2 (Bayna Yadayk)', arabic: 'الجزء الثاني' },
+    { id: 'tome1', label: 'Tome 1 (Bayna Yadayk)', arabic: 'الجزء الأول' },
     { id: 'quran', label: 'Versets du Coran', arabic: 'آيَاتٌ قُرْآنِيَّة' },
     { id: 'hadith', label: 'Hadiths Prophétiques', arabic: 'أَحَادِيثُ نَبَوِيَّة' },
     { id: 'dua', label: 'Invocations (Adhkar)', arabic: 'أَدْعِيَةٌ وَأَذْكَار' },
-    { id: 'wisdom', label: 'Sagesses & Pensées', arabic: 'حِكَمٌ وَآثَار' },
+    { id: 'wisdom', label: 'Sagesses & Proverbes', arabic: 'حِكَمٌ وَأَمْثَال' },
   ];
 
   const filteredTexts = RELIGIOUS_TEXTS.filter((t) => {
     if (selectedCategory === 'all') return true;
+    if (selectedCategory === 'tome1' || selectedCategory === 'tome2' || selectedCategory === 'tome3') {
+      return t.volumeSource === selectedCategory || t.category === selectedCategory;
+    }
     return t.category === selectedCategory;
   });
 

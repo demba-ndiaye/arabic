@@ -10,7 +10,8 @@ import {
   getAllWords, 
   saveCustomWord 
 } from './utils/storage';
-import { UserProgress, WordBreakdown, AdvancedVocabWord } from './types/app';
+import { TomesViewer } from './components/TomesViewer';
+import { UserProgress, WordBreakdown, AdvancedVocabWord, VolumeSource } from './types/app';
 import { Globe, Heart, BookOpen } from 'lucide-react';
 
 export function App() {
@@ -19,6 +20,7 @@ export function App() {
   const [progress, setProgress] = useState<UserProgress>(getInitialProgress());
   const [words, setWords] = useState<AdvancedVocabWord[]>(getAllWords());
   const [notification, setNotification] = useState<string | null>(null);
+  const [activeVolumeFilter, setActiveVolumeFilter] = useState<VolumeSource>('all');
 
   // Sync progress changes to localStorage
   const handleUpdateProgress = (updated: UserProgress) => {
@@ -54,6 +56,15 @@ export function App() {
     setActiveTab('reading');
   };
 
+  const handleNavigateToExercises = (volumeId: 'tome1' | 'tome2' | 'tome3') => {
+    setActiveVolumeFilter(volumeId);
+    setActiveTab('reading');
+  };
+
+  const handleNavigateToVocab = (volumeId: 'tome1' | 'tome2' | 'tome3') => {
+    setActiveTab('vocab');
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans text-slate-900 selection:bg-indigo-100 selection:text-indigo-900">
       {/* Toast Notification */}
@@ -81,6 +92,14 @@ export function App() {
             onUpdateProgress={handleUpdateProgress}
             audioRate={audioRate}
             onAddWordToNotebook={handleAddWordToNotebook}
+            initialVolumeFilter={activeVolumeFilter}
+          />
+        )}
+
+        {activeTab === 'tomes' && (
+          <TomesViewer
+            onNavigateToExercises={handleNavigateToExercises}
+            onNavigateToVocab={handleNavigateToVocab}
           />
         )}
 
