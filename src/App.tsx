@@ -21,6 +21,8 @@ export function App() {
   const [words, setWords] = useState<AdvancedVocabWord[]>(getAllWords());
   const [notification, setNotification] = useState<string | null>(null);
   const [activeVolumeFilter, setActiveVolumeFilter] = useState<VolumeSource>('all');
+  const [activeTextId, setActiveTextId] = useState<string | undefined>(undefined);
+  const [activeVocabCategory, setActiveVocabCategory] = useState<string | undefined>(undefined);
 
   // Sync progress changes to localStorage
   const handleUpdateProgress = (updated: UserProgress) => {
@@ -34,7 +36,7 @@ export function App() {
 
   // Quick action: add word from reading trainer to personal vocabulary
   const handleAddWordToNotebook = (wb: WordBreakdown) => {
-    const newWord = saveCustomWord({
+    saveCustomWord({
       arabicWithoutHarakat: wb.wordNoHarakat,
       arabicWithHarakat: wb.wordWithHarakat,
       transliteration: wb.transliteration,
@@ -53,15 +55,24 @@ export function App() {
   };
 
   const handleSelectTextForTraining = (textId: string) => {
+    setActiveVolumeFilter('all');
+    setActiveTextId(textId);
     setActiveTab('reading');
   };
 
   const handleNavigateToExercises = (volumeId: 'tome1' | 'tome2' | 'tome3') => {
     setActiveVolumeFilter(volumeId);
+    setActiveTextId(undefined);
     setActiveTab('reading');
   };
 
   const handleNavigateToVocab = (volumeId: 'tome1' | 'tome2' | 'tome3') => {
+    const categoryMap: Record<'tome1' | 'tome2' | 'tome3', string> = {
+      tome1: 'Tome 1',
+      tome2: 'Tome 2',
+      tome3: 'Tome 3'
+    };
+    setActiveVocabCategory(categoryMap[volumeId]);
     setActiveTab('vocab');
   };
 
@@ -93,6 +104,7 @@ export function App() {
             audioRate={audioRate}
             onAddWordToNotebook={handleAddWordToNotebook}
             initialVolumeFilter={activeVolumeFilter}
+            initialTextId={activeTextId}
           />
         )}
 
@@ -117,6 +129,7 @@ export function App() {
             progress={progress}
             onUpdateProgress={handleUpdateProgress}
             audioRate={audioRate}
+            initialCategory={activeVocabCategory}
           />
         )}
 

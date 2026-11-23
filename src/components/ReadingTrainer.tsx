@@ -1,22 +1,23 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { RELIGIOUS_TEXTS } from '../data/religiousTexts';
 import { READING_EXERCISES } from '../data/readingExercises';
-import { ReligiousText, WordBreakdown, UserProgress, VolumeSource } from '../types/app';
+import { WordBreakdown, UserProgress, VolumeSource } from '../types/app';
 import { playArabicSpeech } from '../utils/audio';
-import { 
-  Eye, 
-  EyeOff, 
-  Volume2, 
-  CheckCircle2, 
-  XCircle, 
-  Sparkles, 
-  HelpCircle, 
-  BookOpen, 
-  ArrowRight, 
-  RotateCcw,
+import {
+  Eye,
+  EyeOff,
+  Volume2,
+  CheckCircle2,
+  XCircle,
+  Sparkles,
+  HelpCircle,
+  BookOpen,
+  ArrowRight,
+  ArrowLeft,
   Plus,
   Bookmark,
-  Filter
+  Filter,
+  Check
 } from 'lucide-react';
 
 interface ReadingTrainerProps {
@@ -25,6 +26,7 @@ interface ReadingTrainerProps {
   audioRate: number;
   onAddWordToNotebook?: (word: WordBreakdown) => void;
   initialVolumeFilter?: VolumeSource;
+  initialTextId?: string;
 }
 
 export const ReadingTrainer: React.FC<ReadingTrainerProps> = ({
@@ -32,21 +34,35 @@ export const ReadingTrainer: React.FC<ReadingTrainerProps> = ({
   onUpdateProgress,
   audioRate,
   onAddWordToNotebook,
-  initialVolumeFilter = 'all'
+  initialVolumeFilter = 'all',
+  initialTextId
 }) => {
   // Volume filter state (Tome 1, Tome 2, Tome 3, Coran & Hadith)
   const [volumeFilter, setVolumeFilter] = useState<VolumeSource>(initialVolumeFilter);
 
   // Reading mode state
-  const [selectedTextId, setSelectedTextId] = useState<string>('tome3-miracle-quran');
+  const [selectedTextId, setSelectedTextId] = useState<string>(initialTextId || 'tome3-miracle-quran');
   const [showAllHarakat, setShowAllHarakat] = useState<boolean>(false);
   const [selectedWord, setSelectedWord] = useState<WordBreakdown | null>(null);
+  const [validatedWordsByText, setValidatedWordsByText] = useState<Record<string, string[]>>({});
 
   // Quiz mode state
   const [quizIndex, setQuizIndex] = useState<number>(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswerSubmitted, setIsAnswerSubmitted] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<'text-study' | 'quiz'>('text-study');
+
+  useEffect(() => {
+    setVolumeFilter(initialVolumeFilter);
+  }, [initialVolumeFilter]);
+
+  useEffect(() => {
+    if (initialTextId) {
+      setSelectedTextId(initialTextId);
+      setSelectedWord(null);
+      setActiveTab('text-study');
+    }
+  }, [initialTextId]);
 
   // Filtered texts
   const filteredTexts = useMemo(() => {
@@ -65,11 +81,100 @@ export const ReadingTrainer: React.FC<ReadingTrainerProps> = ({
   }, [volumeFilter]);
 
   const currentText = filteredTexts.find(t => t.id === selectedTextId) || filteredTexts[0] || RELIGIOUS_TEXTS[0];
-  const currentQuiz = filteredQuizzes[quizIndex] || filteredQuizzes[0] || READING_EXERCISES[0];
+  const currentTextIndex = filteredTexts.findIndex(t => t.id === currentText.id);
+  const hasMultipleTexts = filteredTexts.length > 1;
+  const nextText = hasMultipleTexts
+    ? filteredTexts[(currentTextIndex + 1) % filteredTexts.length]
+    : null;
+
+  const safeQuizIndex = filteredQuizzes.length > 0 ? quizIndex % filteredQuizzes.length : 0;
+  const currentQuiz = filteredQuizzes[safeQuizIndex] || READING_EXERCISES[0];
+
+  const currentValidatedWordIds = validatedWordsByText[currentText.id] || [];
+  const selectedWordIndex = selectedWord
+    ? currentText.words.findIndex(w => w.id === selectedWord.id)
+    : -1;
+  const isSelectedWordValidated = selectedWord
+    ? currentValidatedWordIds.includes(selectedWord.id)
+    : false;
+  const validatedCount = currentValidatedWordIds.length;
+  const totalWordsCount = currentText.words.length;
+  const allWordsValidated = totalWordsCount > 0 && validatedCount >= totalWordsCount;
+
+  const handleChangeVolumeFilter = (newFilter: VolumeSource) => {
+    setVolumeFilter(newFilter);
+    setSelectedWord(null);
+    setQuizIndex(0);
+    setSelectedAnswer(null);
+    setIsAnswerSubmitted(false);
+
+    const matchingTexts = RELIGIOUS_TEXTS.filter(t => newFilter === 'all' || t.volumeSource === newFilter);
+    if (matchingTexts.length > 0 && !matchingTexts.some(t => t.id === selectedTextId)) {
+      setSelectedTextId(matchingTexts[0].id);
+    }
+  };
+
+  const handleSelectText = (textId: string) => {
+    setSelectedTextId(textId);
+    setSelectedWord(null);
+  };
 
   const handleWordClick = (word: WordBreakdown) => {
     setSelectedWord(word);
     playArabicSpeech(word.wordWithHarakat, audioRate);
+  };
+
+  const markWordAsValidated = (wordId: string): string[] => {
+    const existing = validatedWordsByText[currentText.id] || [];
+    if (existing.includes(wordId)) {
+      return existing;
+    }
+
+    const updatedList = [...existing, wordId];
+    setValidatedWordsByText(prev => ({
+      ...prev,
+      [currentText.id]: updatedList
+    }));
+
+    onUpdateProgress({
+      ...progress,
+      dailyWordsReviewedToday: progress.dailyWordsReviewedToday + 1
+    });
+
+    return updatedList;
+  };
+
+  const handleValidateAndNextWord = () => {
+    if (!selectedWord || totalWordsCount === 0) return;
+
+    const updatedValidated = markWordAsValidated(selectedWord.id);
+    const currentIdx = currentText.words.findIndex(w => w.id === selectedWord.id);
+
+    // Prefer the next unvalidated word after currentIdx, then wrap around, else sequential next
+    const nextUnvalidatedAfter = currentText.words.find(
+      (w, idx) => idx > currentIdx && !updatedValidated.includes(w.id)
+    );
+    const firstUnvalidatedBefore = currentText.words.find(
+      (w) => w.id !== selectedWord.id && !updatedValidated.includes(w.id)
+    );
+    const nextSequential = currentIdx + 1 < totalWordsCount
+      ? currentText.words[currentIdx + 1]
+      : currentText.words[0];
+
+    const nextWord = nextUnvalidatedAfter || firstUnvalidatedBefore || nextSequential;
+    if (nextWord) {
+      setSelectedWord(nextWord);
+      playArabicSpeech(nextWord.wordWithHarakat, audioRate);
+    }
+  };
+
+  const handlePrevWord = () => {
+    if (!selectedWord || totalWordsCount === 0) return;
+    const currentIdx = currentText.words.findIndex(w => w.id === selectedWord.id);
+    const prevIdx = (currentIdx - 1 + totalWordsCount) % totalWordsCount;
+    const prevWord = currentText.words[prevIdx];
+    setSelectedWord(prevWord);
+    playArabicSpeech(prevWord.wordWithHarakat, audioRate);
   };
 
   const handlePlayFullText = () => {
@@ -86,7 +191,6 @@ export const ReadingTrainer: React.FC<ReadingTrainerProps> = ({
     const newScore = isCorrect ? progress.vocalizationQuizScore + 1 : progress.vocalizationQuizScore;
     const newTotal = progress.vocalizationQuizTotal + 1;
 
-    // Play speech of correct word
     playArabicSpeech(currentQuiz.correctWordWithHarakat, audioRate);
 
     onUpdateProgress({
@@ -103,12 +207,38 @@ export const ReadingTrainer: React.FC<ReadingTrainerProps> = ({
   };
 
   const handleMarkTextCompleted = () => {
+    const allIds = currentText.words.map(w => w.id);
+    const previouslyValidated = validatedWordsByText[currentText.id] || [];
+    const newlyValidatedCount = allIds.filter(id => !previouslyValidated.includes(id)).length;
+
+    setValidatedWordsByText(prev => ({
+      ...prev,
+      [currentText.id]: allIds
+    }));
+
     if (!progress.textsReadIds.includes(currentText.id)) {
       onUpdateProgress({
         ...progress,
         textsReadIds: [...progress.textsReadIds, currentText.id],
-        dailyWordsReviewedToday: progress.dailyWordsReviewedToday + currentText.words.length
+        dailyWordsReviewedToday: progress.dailyWordsReviewedToday + newlyValidatedCount
       });
+    } else if (newlyValidatedCount > 0) {
+      onUpdateProgress({
+        ...progress,
+        dailyWordsReviewedToday: progress.dailyWordsReviewedToday + newlyValidatedCount
+      });
+    }
+  };
+
+  const handleGoToNextText = () => {
+    if (!progress.textsReadIds.includes(currentText.id)) {
+      handleMarkTextCompleted();
+    }
+    if (nextText) {
+      setSelectedTextId(nextText.id);
+      setSelectedWord(null);
+    } else {
+      setActiveTab('quiz');
     }
   };
 
@@ -141,6 +271,7 @@ export const ReadingTrainer: React.FC<ReadingTrainerProps> = ({
           {/* Subtab switch */}
           <div className="flex items-center gap-1.5 bg-slate-100 p-1.5 rounded-xl border border-slate-200 self-start md:self-center">
             <button
+              type="button"
               onClick={() => setActiveTab('text-study')}
               className={`px-3.5 py-2 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
                 activeTab === 'text-study'
@@ -152,6 +283,7 @@ export const ReadingTrainer: React.FC<ReadingTrainerProps> = ({
               Atelier Mot à Mot
             </button>
             <button
+              type="button"
               onClick={() => setActiveTab('quiz')}
               className={`px-3.5 py-2 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
                 activeTab === 'quiz'
@@ -171,7 +303,8 @@ export const ReadingTrainer: React.FC<ReadingTrainerProps> = ({
             <Filter className="w-3.5 h-3.5 text-indigo-600" /> Filtrer la source :
           </span>
           <button
-            onClick={() => setVolumeFilter('all')}
+            type="button"
+            onClick={() => handleChangeVolumeFilter('all')}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all border ${
               volumeFilter === 'all'
                 ? 'bg-slate-900 text-white border-slate-900 shadow-2xs'
@@ -181,7 +314,8 @@ export const ReadingTrainer: React.FC<ReadingTrainerProps> = ({
             Toutes les sources ({RELIGIOUS_TEXTS.length} textes)
           </button>
           <button
-            onClick={() => setVolumeFilter('tome3')}
+            type="button"
+            onClick={() => handleChangeVolumeFilter('tome3')}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all border ${
               volumeFilter === 'tome3'
                 ? 'bg-indigo-600 text-white border-indigo-600 shadow-2xs'
@@ -191,7 +325,8 @@ export const ReadingTrainer: React.FC<ReadingTrainerProps> = ({
             📕 Tome 3 (Avancé)
           </button>
           <button
-            onClick={() => setVolumeFilter('tome2')}
+            type="button"
+            onClick={() => handleChangeVolumeFilter('tome2')}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all border ${
               volumeFilter === 'tome2'
                 ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs'
@@ -201,7 +336,8 @@ export const ReadingTrainer: React.FC<ReadingTrainerProps> = ({
             📗 Tome 2 (Intermédiaire)
           </button>
           <button
-            onClick={() => setVolumeFilter('tome1')}
+            type="button"
+            onClick={() => handleChangeVolumeFilter('tome1')}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all border ${
               volumeFilter === 'tome1'
                 ? 'bg-amber-600 text-white border-amber-600 shadow-2xs'
@@ -211,7 +347,8 @@ export const ReadingTrainer: React.FC<ReadingTrainerProps> = ({
             📘 Tome 1 (Fondations)
           </button>
           <button
-            onClick={() => setVolumeFilter('quran_hadith')}
+            type="button"
+            onClick={() => handleChangeVolumeFilter('quran_hadith')}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all border ${
               volumeFilter === 'quran_hadith'
                 ? 'bg-teal-700 text-white border-teal-700 shadow-2xs'
@@ -231,25 +368,33 @@ export const ReadingTrainer: React.FC<ReadingTrainerProps> = ({
             <span className="text-xs font-display font-semibold text-slate-500 uppercase tracking-wider shrink-0 mr-1">
               Choisir un texte ({filteredTexts.length}) :
             </span>
-            {filteredTexts.map((t) => (
-              <button
-                key={t.id}
-                onClick={() => {
-                  setSelectedTextId(t.id);
-                  setSelectedWord(null);
-                }}
-                className={`px-3.5 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition-all border flex items-center gap-2 ${
-                  currentText.id === t.id
-                    ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm font-semibold'
-                    : 'bg-white hover:bg-slate-50 text-slate-700 border-slate-200 shadow-2xs'
-                }`}
-              >
-                <span>{t.title}</span>
-                <span className="opacity-70 text-[10px] uppercase font-mono">
-                  {t.volumeSource ? t.volumeSource.toUpperCase() : t.category}
-                </span>
-              </button>
-            ))}
+            {filteredTexts.map((t) => {
+              const isRead = progress.textsReadIds.includes(t.id);
+              return (
+                <button
+                  key={t.id}
+                  type="button"
+                  onClick={() => handleSelectText(t.id)}
+                  className={`px-3.5 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition-all border flex items-center gap-2 ${
+                    currentText.id === t.id
+                      ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm font-semibold'
+                      : 'bg-white hover:bg-slate-50 text-slate-700 border-slate-200 shadow-2xs'
+                  }`}
+                >
+                  {isRead && (
+                    <CheckCircle2
+                      className={`w-3.5 h-3.5 shrink-0 ${
+                        currentText.id === t.id ? 'text-emerald-200' : 'text-emerald-600'
+                      }`}
+                    />
+                  )}
+                  <span>{t.title}</span>
+                  <span className="opacity-70 text-[10px] uppercase font-mono">
+                    {t.volumeSource ? t.volumeSource.toUpperCase() : t.category}
+                  </span>
+                </button>
+              );
+            })}
           </div>
 
           {/* Main Reading Canvas */}
@@ -257,7 +402,7 @@ export const ReadingTrainer: React.FC<ReadingTrainerProps> = ({
             {/* Header of the text */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b border-slate-100 gap-3">
               <div>
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   <span className="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 text-xs font-medium">
                     {currentText.source}
                   </span>
@@ -300,18 +445,25 @@ export const ReadingTrainer: React.FC<ReadingTrainerProps> = ({
 
             {/* Interactive Arabic Sentence Box */}
             <div className="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-6 sm:p-8 text-center relative">
-              <div className="text-xs text-slate-600 mb-3 font-medium">
-                💡 <span className="font-semibold text-slate-700">Consigne :</span> Lisez le texte mentalement sans les voyelles, puis cliquez sur chaque mot pour valider sa vocalisation et son rôle grammatical.
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-slate-600 mb-4 font-medium">
+                <span>
+                  💡 <span className="font-semibold text-slate-700">Consigne :</span> Cliquez sur un mot pour vérifier sa vocalisation, puis validez-le pour passer au suivant.
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-slate-200 text-[11px] font-semibold text-slate-700 self-center sm:self-auto shrink-0">
+                  <CheckCircle2 className={`w-3.5 h-3.5 ${allWordsValidated ? 'text-emerald-600' : 'text-indigo-500'}`} />
+                  {validatedCount} / {totalWordsCount} mots validés
+                </span>
               </div>
 
               {/* Words display */}
-              <div 
-                dir="rtl" 
-                className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 font-arabic text-3xl sm:text-4xl text-slate-900 leading-loose py-4"
+              <div
+                dir="rtl"
+                className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3.5 font-arabic text-3xl sm:text-4xl text-slate-900 leading-loose py-4"
               >
                 {currentText.words.map((w) => {
                   const isSelected = selectedWord?.id === w.id;
-                  const displayWord = showAllHarakat ? w.wordWithHarakat : w.wordNoHarakat;
+                  const isValidated = currentValidatedWordIds.includes(w.id);
+                  const displayWord = showAllHarakat || isValidated ? w.wordWithHarakat : w.wordNoHarakat;
 
                   return (
                     <button
@@ -321,13 +473,23 @@ export const ReadingTrainer: React.FC<ReadingTrainerProps> = ({
                       className={`relative px-3 py-1 rounded-xl transition-all select-none duration-150 ${
                         isSelected
                           ? 'bg-indigo-600 text-white shadow-md scale-105 ring-2 ring-indigo-500/20'
+                          : isValidated
+                          ? 'bg-emerald-50/90 hover:bg-emerald-100 text-emerald-950 border border-emerald-200 shadow-2xs'
                           : 'bg-white hover:bg-indigo-50 hover:text-indigo-900 border border-slate-200/80 shadow-2xs'
                       }`}
                     >
                       {displayWord}
+                      {isValidated && !isSelected && (
+                        <span
+                          className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-2xs"
+                          title="Mot validé"
+                        >
+                          <Check className="w-2.5 h-2.5 stroke-[3]" />
+                        </span>
+                      )}
                       {/* Sub-label showing vocalization */}
                       {isSelected && (
-                        <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[10px] font-sans font-normal text-indigo-600 whitespace-nowrap bg-indigo-50 px-1.5 py-0.5 rounded border border-indigo-200">
+                        <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[10px] font-sans font-normal text-indigo-700 whitespace-nowrap bg-indigo-50 px-1.5 py-0.5 rounded border border-indigo-200 z-10">
                           {w.wordWithHarakat}
                         </span>
                       )}
@@ -344,13 +506,23 @@ export const ReadingTrainer: React.FC<ReadingTrainerProps> = ({
 
             {/* Word Analysis Drawer (When a word is clicked) */}
             {selectedWord && (
-              <div className="bg-gradient-to-br from-indigo-50/70 to-slate-50 border border-indigo-100 rounded-2xl p-5 shadow-xs space-y-3 animate-in fade-in duration-200">
+              <div className="bg-gradient-to-br from-indigo-50/70 to-slate-50 border border-indigo-100 rounded-2xl p-5 shadow-xs space-y-4 animate-in fade-in duration-200">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-indigo-100/70 pb-3">
                   <div className="flex items-center gap-4">
                     <div className="font-arabic text-3xl sm:text-4xl text-indigo-950 font-bold bg-white px-4 py-1.5 rounded-xl border border-indigo-200 shadow-2xs">
                       {selectedWord.wordWithHarakat}
                     </div>
                     <div>
+                      <div className="flex items-center gap-2 mb-0.5">
+                        <span className="text-[11px] font-display font-semibold text-slate-500">
+                          Mot {selectedWordIndex + 1} sur {totalWordsCount}
+                        </span>
+                        {isSelectedWordValidated && (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-semibold">
+                            <Check className="w-3 h-3" /> Validé
+                          </span>
+                        )}
+                      </div>
                       <div className="text-xs font-mono font-semibold text-indigo-700">
                         {selectedWord.transliteration}
                       </div>
@@ -360,7 +532,7 @@ export const ReadingTrainer: React.FC<ReadingTrainerProps> = ({
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <button
                       type="button"
                       onClick={() => playArabicSpeech(selectedWord.wordWithHarakat, audioRate)}
@@ -406,24 +578,85 @@ export const ReadingTrainer: React.FC<ReadingTrainerProps> = ({
                     </div>
                   )}
                 </div>
+
+                {/* Word navigation & validation action bar */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 pt-3 border-t border-indigo-100/80">
+                  <button
+                    type="button"
+                    onClick={handlePrevWord}
+                    className="px-3.5 py-2 bg-white hover:bg-slate-100 text-slate-700 rounded-xl text-xs font-semibold border border-slate-200 flex items-center justify-center gap-1.5 transition-colors"
+                  >
+                    <ArrowLeft className="w-3.5 h-3.5" /> Mot précédent
+                  </button>
+
+                  <div className="flex flex-wrap items-center justify-end gap-2">
+                    {allWordsValidated ? (
+                      <button
+                        type="button"
+                        onClick={handleGoToNextText}
+                        className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 shadow-xs transition-colors"
+                      >
+                        <CheckCircle2 className="w-3.5 h-3.5" />
+                        {nextText ? 'Tous les mots validés — Texte suivant' : 'Tous les mots validés — Passer au Quizz'}
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={handleValidateAndNextWord}
+                        className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 shadow-xs transition-colors"
+                      >
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                        <span>
+                          {isSelectedWordValidated ? 'Passer au mot suivant' : 'Valider et passer au mot suivant'}
+                        </span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
+                </div>
               </div>
             )}
 
-            {/* Context and benefit */}
-            <div className="flex items-center justify-between text-xs text-slate-500 pt-2 border-t border-slate-100">
+            {/* Context, validation and next-step actions */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-slate-500 pt-3 border-t border-slate-100">
               <span className="italic">{currentText.contextOrBenefit}</span>
-              <button
-                type="button"
-                onClick={handleMarkTextCompleted}
-                className={`px-3 py-1.5 rounded-xl font-semibold flex items-center gap-1.5 transition-all ${
-                  isCurrentTextRead
-                    ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                    : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
-                }`}
-              >
-                <CheckCircle2 className={`w-3.5 h-3.5 ${isCurrentTextRead ? 'text-emerald-600' : 'text-slate-400'}`} />
-                {isCurrentTextRead ? 'Texte validé' : 'Marquer comme lu sans voyelles'}
-              </button>
+              <div className="flex flex-wrap items-center gap-2 shrink-0">
+                <button
+                  type="button"
+                  onClick={handleMarkTextCompleted}
+                  className={`px-3.5 py-2 rounded-xl font-semibold flex items-center gap-1.5 transition-all ${
+                    isCurrentTextRead
+                      ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                      : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                  }`}
+                >
+                  <CheckCircle2 className={`w-3.5 h-3.5 ${isCurrentTextRead ? 'text-emerald-600' : 'text-slate-400'}`} />
+                  {isCurrentTextRead ? 'Texte validé' : 'Marquer comme lu sans voyelles'}
+                </button>
+
+                {isCurrentTextRead && nextText && (
+                  <button
+                    type="button"
+                    onClick={handleGoToNextText}
+                    className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold flex items-center gap-1.5 shadow-2xs transition-colors"
+                  >
+                    <span>Texte suivant</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                )}
+
+                {isCurrentTextRead && (
+                  <button
+                    type="button"
+                    onClick={() => setActiveTab('quiz')}
+                    className="px-3.5 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-semibold flex items-center gap-1.5 shadow-2xs transition-colors"
+                  >
+                    <HelpCircle className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Quizz ({filteredQuizzes.length})</span>
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -437,7 +670,7 @@ export const ReadingTrainer: React.FC<ReadingTrainerProps> = ({
             <div className="flex items-center justify-between text-xs text-slate-500 pb-3 border-b border-slate-100">
               <div className="flex items-center gap-2">
                 <span className="font-display font-semibold uppercase tracking-wider text-indigo-600">
-                  Défi #{quizIndex + 1} / {filteredQuizzes.length}
+                  Défi #{safeQuizIndex + 1} / {filteredQuizzes.length}
                 </span>
                 <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-mono text-[10px]">
                   {getSourceBadge(currentQuiz.volumeSource)}
@@ -453,7 +686,7 @@ export const ReadingTrainer: React.FC<ReadingTrainerProps> = ({
               <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">
                 Comment vocaliser le mot surligné dans cette phrase ?
               </p>
-              <div 
+              <div
                 dir="rtl"
                 className="font-arabic text-3xl sm:text-4xl text-slate-900 leading-relaxed py-3"
               >

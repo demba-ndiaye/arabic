@@ -10,18 +10,25 @@ export const RELIGIOUS_TEXTS: ReligiousText[] = [
     volumeSource: 'tome3',
     source: 'Tome 3 - Unité 1 (المعجزة الخالدة, p. 3)',
     difficulty: 'Avancé',
-    arabicWithHarakat: 'القُرْآنُ مُعْجِزَةُ الرَّسُولِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ، أَنْزَلَهُ اللَّهُ سُبْحَانَهُ وَتَعَالَى مُنَجَّمًا حَسَبَ الحَوَادِثِ، تَثْبِيتًا لِقَلْبِ الرَّسُولِ وَقُلُوبِ المُؤْمِنِينَ.',
-    arabicWithoutHarakat: 'القرآن معجزة الرسول صلى الله عليه وسلم، أنزله الله سبحانه وتعالى منجما حسب الحوادث، تثبيتا لقلب الرسول وقلوب المؤمنين.',
-    translationFr: 'Le Coran est le miracle permanent du Prophète (ﷺ), révélé par Allah de façon graduelle au fil des événements, afin d\'affermir le cœur du Messager et celui des croyants.',
+    arabicWithHarakat: 'القُرْآنُ مُعْجِزَةُ الرَّسُولِ الخَالِدَةُ، أَنْزَلَهُ اللَّهُ مُنَجَّمًا حَسَبَ الحَوَادِثِ، تَثْبِيتًا لِقَلْبِ الرَّسُولِ وَقُلُوبِ المُؤْمِنِينَ.',
+    arabicWithoutHarakat: 'القرآن معجزة الرسول الخالدة، أنزله الله منجما حسب الحوادث، تثبيتا لقلب الرسول وقلوب المؤمنين.',
+    translationFr: 'Le Coran est le miracle éternel du Messager, révélé par Allah de façon graduelle au fil des événements, afin d\'affermir le cœur du Messager et celui des croyants.',
     contextOrBenefit: 'Tome 3 de « Al-Arabiyyah Bayna Yadayk ». Ce texte illustre la spécificité de la révélation fragmentée (Tanjīm) et l\'éloquence divine.',
     words: [
       { id: 't3m-1', wordNoHarakat: 'القرآن', wordWithHarakat: 'القُرْآنُ', transliteration: 'al-Qur’ānu', translationFr: 'le Coran', root: 'ق-ر-أ', grammarNote: 'Sujet nominatif (مبتدأ مرفوع بالضمة)' },
       { id: 't3m-2', wordNoHarakat: 'معجزة', wordWithHarakat: 'مُعْجِزَةُ', transliteration: 'mu‘jizatu', translationFr: 'le miracle probatoire', root: 'ع-ج-ز', grammarNote: 'Attribut du sujet (خبر المبتدأ مرفوع)' },
       { id: 't3m-3', wordNoHarakat: 'الرسول', wordWithHarakat: 'الرَّسُولِ', transliteration: 'ar-Rasūli', translationFr: 'du Messager', root: 'ر-س-ل', grammarNote: 'Complément de nom au génitif (مضاف إليه مجرور)' },
-      { id: 't3m-4', wordNoHarakat: 'أنزله', wordWithHarakat: 'أَنْزَلَهُ', transliteration: 'anzalahu', translationFr: 'Il l\'a fait descendre', root: 'ن-ز-ل', grammarNote: 'Verbe au passé + pronom COD' },
-      { id: 't3m-5', wordNoHarakat: 'الله', wordWithHarakat: 'اللَّهُ', transliteration: 'Allāhu', translationFr: 'Allah', root: 'إ-ل-ه', grammarNote: 'Sujet du verbe anzala (فاعل مرفوع)' },
-      { id: 't3m-6', wordNoHarakat: 'منجما', wordWithHarakat: 'مُنَجَّمًا', transliteration: 'munajjaman', translationFr: 'de façon échelonnée / par étapes', root: 'ن-ج-م', grammarNote: 'Complément d\'état (حال منصوب بالفتحة)' },
-      { id: 't3m-7', wordNoHarakat: 'تثبيتا', wordWithHarakat: 'تَثْبِيتًا', transliteration: 'tathbītan', translationFr: 'pour affermir / comme consolidation', root: 'ث-ب-ت', grammarNote: 'Complément de cause (مفعول لأجله منصوب)' }
+      { id: 't3m-4', wordNoHarakat: 'الخالدة،', wordWithHarakat: 'الخَالِدَةُ،', transliteration: 'al-khālidatu', translationFr: 'l\'éternel', root: 'خ-ل-د', grammarNote: 'Épithète de mu‘jizatu au nominatif (نعت مرفوع)' },
+      { id: 't3m-5', wordNoHarakat: 'أنزله', wordWithHarakat: 'أَنْزَلَهُ', transliteration: 'anzalahu', translationFr: 'Il l\'a fait descendre', root: 'ن-ز-ل', grammarNote: 'Verbe au passé (أفعل) + pronom COD' },
+      { id: 't3m-6', wordNoHarakat: 'الله', wordWithHarakat: 'اللَّهُ', transliteration: 'Allāhu', translationFr: 'Allah', root: 'إ-ل-ه', grammarNote: 'Sujet du verbe anzala (فاعل مرفوع)' },
+      { id: 't3m-7', wordNoHarakat: 'منجما', wordWithHarakat: 'مُنَجَّمًا', transliteration: 'munajjaman', translationFr: 'de façon échelonnée / par étapes', root: 'ن-ج-م', grammarNote: 'Complément d\'état (حال منصوب بالفتحة)' },
+      { id: 't3m-8', wordNoHarakat: 'حسب', wordWithHarakat: 'حَسَبَ', transliteration: 'ḥasaba', translationFr: 'selon / au gré de', root: 'ح-س-ب', grammarNote: 'Adverbe annexé à l\'accusatif (ظرف منصوب)' },
+      { id: 't3m-9', wordNoHarakat: 'الحوادث،', wordWithHarakat: 'الحَوَادِثِ،', transliteration: 'al-ḥawādithi', translationFr: 'les événements', root: 'ح-د-ث', grammarNote: 'Complément de nom au génitif (مضاف إليه مجرور)' },
+      { id: 't3m-10', wordNoHarakat: 'تثبيتا', wordWithHarakat: 'تَثْبِيتًا', transliteration: 'tathbītan', translationFr: 'pour affermir / comme consolidation', root: 'ث-ب-ت', grammarNote: 'Complément de cause (مفعول لأجله منصوب)' },
+      { id: 't3m-11', wordNoHarakat: 'لقلب', wordWithHarakat: 'لِقَلْبِ', transliteration: 'li-qalbi', translationFr: 'pour le cœur de', root: 'ق-ل-ب', grammarNote: 'Préposition li- + nom génitif (جار ومجرور)' },
+      { id: 't3m-12', wordNoHarakat: 'الرسول', wordWithHarakat: 'الرَّسُولِ', transliteration: 'ar-Rasūli', translationFr: 'du Messager', root: 'ر-س-ل', grammarNote: 'Complément du nom au génitif (مضاف إليه)' },
+      { id: 't3m-13', wordNoHarakat: 'وقلوب', wordWithHarakat: 'وَقُلُوبِ', transliteration: 'wa-qulūbi', translationFr: 'et les cœurs des', root: 'ق-ل-ب', grammarNote: 'Nom coordonné au génitif (معطوف مجرور)' },
+      { id: 't3m-14', wordNoHarakat: 'المؤمنين.', wordWithHarakat: 'المُؤْمِنِينَ.', transliteration: 'al-mu’minīna', translationFr: 'croyants', root: 'أ-م-ن', grammarNote: 'Pluriel masculin sain au génitif par le yā’ (مضاف إليه مجرور بالياء)' }
     ]
   },
   {
@@ -37,11 +44,22 @@ export const RELIGIOUS_TEXTS: ReligiousText[] = [
     translationFr: 'Bilal ibn Rabah, le muezzin du Messager, possède une des plus admirables biographies de sacrifice pour la foi. Sous le rocher brûlant, il proclamait : « Unique ! Unique ! »',
     contextOrBenefit: 'Tome 3. Modèle d\'attachement pur au monothéisme malgré la torture impitoyable des mécréants de Quraysh.',
     words: [
-      { id: 't3b-1', wordNoHarakat: 'لبلال', wordWithHarakat: 'لِبِلَالِ', transliteration: 'li-Bilāli', translationFr: 'Pour Bilal', root: 'ب-ل-ل', grammarNote: 'Préposition + nom propre au génitif' },
-      { id: 't3b-2', wordNoHarakat: 'مؤذن', wordWithHarakat: 'مُؤَذِّنِ', transliteration: 'mu’adh-dhini', translationFr: 'le proclamateur de la prière', root: 'أ-ذ-ن', grammarNote: 'Épithète / apposition au génitif' },
-      { id: 't3b-3', wordNoHarakat: 'سيرة', wordWithHarakat: 'سِيرَةٌ', transliteration: 'sīratun', translationFr: 'une biographie / un parcours', root: 'س-ي-ر', grammarNote: 'Sujet reporté marfū‘ (مبتدأ مؤخر)' },
-      { id: 't3b-4', wordNoHarakat: 'أروع', wordWithHarakat: 'أَرْوَعِ', transliteration: 'arwa‘i', translationFr: 'les plus magnifiques / splendides', root: 'ر-و-ع', grammarNote: 'Nom de supériorité (اسم تفضيل مجرور)' },
-      { id: 't3b-5', wordNoHarakat: 'يردد', wordWithHarakat: 'يُرَدِّدُ', transliteration: 'yuraddidu', translationFr: 'il répétait sans cesse', root: 'ر-د-د', grammarNote: 'Verbe au présent de la forme II' }
+      { id: 't3b-1', wordNoHarakat: 'لبلال', wordWithHarakat: 'لِبِلَالِ', transliteration: 'li-Bilāli', translationFr: 'Pour Bilal', root: 'ب-ل-ل', grammarNote: 'Préposition + nom propre au génitif (جار ومجرور)' },
+      { id: 't3b-2', wordNoHarakat: 'بن', wordWithHarakat: 'بْنِ', transliteration: 'bni', translationFr: 'fils de', root: 'ب-ن-و', grammarNote: 'Apposition au génitif (بدل أو نعت مجرور)' },
+      { id: 't3b-3', wordNoHarakat: 'رباح', wordWithHarakat: 'رَبَاحٍ', transliteration: 'Rabāḥin', translationFr: 'Rabah', root: 'ر-ب-ح', grammarNote: 'Complément de nom au génitif avec tanwīn' },
+      { id: 't3b-4', wordNoHarakat: 'مؤذن', wordWithHarakat: 'مُؤَذِّنِ', transliteration: 'mu’adh-dhini', translationFr: 'le muezzin (proclamateur)', root: 'أ-ذ-ن', grammarNote: 'Apposition au génitif (بدل مجرور)' },
+      { id: 't3b-5', wordNoHarakat: 'الرسول', wordWithHarakat: 'الرَّسُولِ', transliteration: 'ar-Rasūli', translationFr: 'du Messager', root: 'ر-س-ل', grammarNote: 'Complément de nom au génitif (مضاف إليه)' },
+      { id: 't3b-6', wordNoHarakat: 'سيرة', wordWithHarakat: 'سِيرَةٌ', transliteration: 'sīratun', translationFr: 'une biographie / un parcours', root: 'س-ي-ر', grammarNote: 'Sujet reporté marfū‘ (مبتدأ مؤخر مرفوع)' },
+      { id: 't3b-7', wordNoHarakat: 'من', wordWithHarakat: 'مِنْ', transliteration: 'min', translationFr: 'parmi', root: 'م-ن', grammarNote: 'Préposition (حرف جر)' },
+      { id: 't3b-8', wordNoHarakat: 'أروع', wordWithHarakat: 'أَرْوَعِ', transliteration: 'arwa‘i', translationFr: 'les plus magnifiques', root: 'ر-و-ع', grammarNote: 'Nom de supériorité génitif (اسم تفضيل مجرور)' },
+      { id: 't3b-9', wordNoHarakat: 'سير', wordWithHarakat: 'سِيَرِ', transliteration: 'siyari', translationFr: 'parcours / biographies', root: 'س-ي-ر', grammarNote: 'Pluriel brisé annexé au génitif (مضاف إليه)' },
+      { id: 't3b-10', wordNoHarakat: 'النضال،', wordWithHarakat: 'النِّضَالِ،', transliteration: 'an-niḍāli', translationFr: 'de la lutte / de l\'endurance', root: 'ن-ض-ل', grammarNote: 'Complément de nom au génitif' },
+      { id: 't3b-11', wordNoHarakat: 'كان', wordWithHarakat: 'كَانَ', transliteration: 'kāna', translationFr: 'il (était en train de)', root: 'ك-و-ن', grammarNote: 'Verbe auxiliaire du passé (فعل ماض ناقص)' },
+      { id: 't3b-12', wordNoHarakat: 'يردد', wordWithHarakat: 'يُرَدِّدُ', transliteration: 'yuraddidu', translationFr: 'répétait sans cesse', root: 'ر-د-د', grammarNote: 'Verbe au présent de la forme II (يفعّل)' },
+      { id: 't3b-13', wordNoHarakat: 'تحت', wordWithHarakat: 'تَحْتَ', transliteration: 'taḥta', translationFr: 'sous', root: 'ت-ح-ت', grammarNote: 'Adverbe de lieu accusatif (ظرف مكان منصوب)' },
+      { id: 't3b-14', wordNoHarakat: 'الصخرة:', wordWithHarakat: 'الصَّخْرَةِ:', transliteration: 'aṣ-ṣakhrati', translationFr: 'le rocher', root: 'ص-خ-ر', grammarNote: 'Complément de l\'adverbe au génitif' },
+      { id: 't3b-15', wordNoHarakat: 'أحد', wordWithHarakat: 'أَحَدٌ', transliteration: 'Aḥadun', translationFr: 'Unique !', root: 'و-ح-د', grammarNote: 'Prédicat d\'un sujet sous-entendu (هو أحدٌ)' },
+      { id: 't3b-16', wordNoHarakat: 'أحد.', wordWithHarakat: 'أَحَدٌ.', transliteration: 'Aḥadun', translationFr: 'Unique !', root: 'و-ح-د', grammarNote: 'Répétition d\'insistance (توكيد لفظي مرفوع)' }
     ]
   },
   {
@@ -59,8 +77,21 @@ export const RELIGIOUS_TEXTS: ReligiousText[] = [
     words: [
       { id: 't3h-1', wordNoHarakat: 'ساوم', wordWithHarakat: 'سَاوَمَ', transliteration: 'sāwama', translationFr: 'il marchanda / négocia', root: 'س-و-م', grammarNote: 'Verbe au passé de la forme III (فاعَلَ)' },
       { id: 't3h-2', wordNoHarakat: 'أعرابي', wordWithHarakat: 'أَعْرَابِيٌّ', transliteration: 'a‘rābiyyun', translationFr: 'un bédouin du désert', root: 'ع-ر-ب', grammarNote: 'Sujet nominatif (فاعل مرفوع)' },
-      { id: 't3h-3', wordNoHarakat: 'الإسكافي', wordWithHarakat: 'الإِسْكَافِيَّ', transliteration: 'al-iskāfiyya', translationFr: 'le cordonnier / savetier', root: 'س-ك-ف', grammarNote: 'Épithète accusative (نعت منصوب)' },
-      { id: 't3h-4', wordNoHarakat: 'خفين', wordWithHarakat: 'خُفَّيْنِ', transliteration: 'khuffayni', translationFr: 'deux babouches / bottillons', root: 'خ-ف-ف', grammarNote: 'Nom duel au cas génitif avec yā’ (مجرور بالياء)' }
+      { id: 't3h-3', wordNoHarakat: 'حنينا', wordWithHarakat: 'حُنَيْنًا', transliteration: 'Ḥunaynan', translationFr: 'Hunayn', root: 'ح-ن-ن', grammarNote: 'Complément d\'objet direct (مفعول به منصوب)' },
+      { id: 't3h-4', wordNoHarakat: 'الإسكافي', wordWithHarakat: 'الإِسْكَافِيَّ', transliteration: 'al-iskāfiyya', translationFr: 'le cordonnier / savetier', root: 'س-ك-ف', grammarNote: 'Épithète accusative (نعت منصوب)' },
+      { id: 't3h-5', wordNoHarakat: 'في', wordWithHarakat: 'فِي', transliteration: 'fī', translationFr: 'au sujet de', root: 'ف-ي', grammarNote: 'Préposition (حرف جر)' },
+      { id: 't3h-6', wordNoHarakat: 'خفين', wordWithHarakat: 'خُفَّيْنِ', transliteration: 'khuffayni', translationFr: 'deux babouches', root: 'خ-ف-ف', grammarNote: 'Duel au génitif avec yā’ (مجرور بالياء لأنه مثنى)' },
+      { id: 't3h-7', wordNoHarakat: 'حتى', wordWithHarakat: 'حَتَّى', transliteration: 'ḥattā', translationFr: 'jusqu\'à ce que', root: 'ح-ت-ي', grammarNote: 'Particule de but / limite' },
+      { id: 't3h-8', wordNoHarakat: 'أغضبه،', wordWithHarakat: 'أَغْضَبَهُ،', transliteration: 'aghḍabahu', translationFr: 'il le mit en colère', root: 'غ-ض-ب', grammarNote: 'Verbe passé forme IV + pronom objet' },
+      { id: 't3h-9', wordNoHarakat: 'فخدعه', wordWithHarakat: 'فَخَدَعَهُ', transliteration: 'fa-khada‘ahu', translationFr: 'alors il le rusa / trompa', root: 'خ-د-ع', grammarNote: 'Verbe au passé + pronom objet' },
+      { id: 't3h-10', wordNoHarakat: 'حنين،', wordWithHarakat: 'حُنَيْنٌ،', transliteration: 'Ḥunaynun', translationFr: 'Hunayn', root: 'ح-ن-ن', grammarNote: 'Sujet nominatif (فاعل مرفوع)' },
+      { id: 't3h-11', wordNoHarakat: 'فرجع', wordWithHarakat: 'فَرَجَعَ', transliteration: 'fa-raja‘a', translationFr: 'et il retourna', root: 'ر-ج-ع', grammarNote: 'Verbe au passé précédé du fā’ de suite' },
+      { id: 't3h-12', wordNoHarakat: 'الأعرابي', wordWithHarakat: 'الأَعْرَابِيُّ', transliteration: 'al-a‘rābiyyu', translationFr: 'le bédouin', root: 'ع-ر-ب', grammarNote: 'Sujet nominatif (فاعل مرفوع)' },
+      { id: 't3h-13', wordNoHarakat: 'إلى', wordWithHarakat: 'إِلَى', transliteration: 'ilā', translationFr: 'vers', root: 'إ-ل-ي', grammarNote: 'Préposition de direction' },
+      { id: 't3h-14', wordNoHarakat: 'أهله', wordWithHarakat: 'أَهْلِهِ', transliteration: 'ahlihi', translationFr: 'sa famille / les siens', root: 'أ-ه-ل', grammarNote: 'Génitif après ilā + pronom possessif' },
+      { id: 't3h-15', wordNoHarakat: 'بالخفين', wordWithHarakat: 'بِالخُفَّيْنِ', transliteration: 'bil-khuffayni', translationFr: 'avec les deux babouches', root: 'خ-ف-ف', grammarNote: 'Préposition bi- + duel au génitif (مجرور بالياء)' },
+      { id: 't3h-16', wordNoHarakat: 'دون', wordWithHarakat: 'دُونَ', transliteration: 'dūna', translationFr: 'sans', root: 'د-و-ن', grammarNote: 'Adverbe d\'exclusion accusatif (ظرف منصوب)' },
+      { id: 't3h-17', wordNoHarakat: 'ناقته.', wordWithHarakat: 'نَاقَتِهِ.', transliteration: 'nāqatihi', translationFr: 'sa chamelle', root: 'ن-و-ق', grammarNote: 'Complément d\'annexion au génitif + pronom' }
     ]
   },
 
@@ -78,11 +109,23 @@ export const RELIGIOUS_TEXTS: ReligiousText[] = [
     translationFr: 'Ô Roi ! Nous étions un peuple plongé dans l\'ignorance, adorant les idoles, jusqu\'à ce qu\'Allah nous envoie un Messager dont nous connaissons la noble lignée, la véracité et la loyauté.',
     contextOrBenefit: 'Tome 2. Le discours historique qui émut le roi d\'Abyssinie jusqu\'aux larmes en découvrant la vérité de l\'Islam.',
     words: [
-      { id: 't2n-1', wordNoHarakat: 'الملك', wordWithHarakat: 'المَلِكُ', transliteration: 'al-Maliku', translationFr: 'le roi / souverain', root: 'م-ل-ك', grammarNote: 'Interpellé après Ayyuhā (منادى مبني على الضم)' },
-      { id: 't2n-2', wordNoHarakat: 'كنا', wordWithHarakat: 'كُنَّا', transliteration: 'kunnā', translationFr: 'nous étions', root: 'ك-و-ن', grammarNote: 'Kāna + pronom sujet (نحن)' },
-      { id: 't2n-3', wordNoHarakat: 'قوما', wordWithHarakat: 'قَوْمًا', transliteration: 'qawman', translationFr: 'un peuple / une communauté', root: 'ق-و-م', grammarNote: 'Attribut de kāna au cas accusatif (خبر كان منصوب)' },
-      { id: 't2n-4', wordNoHarakat: 'الأصنام', wordWithHarakat: 'الأَصْنَامَ', transliteration: 'al-aṣnāma', translationFr: 'les idoles de pierre', root: 'ص-ن-م', grammarNote: 'Complément d\'objet direct (مفعول به منصوب)' },
-      { id: 't2n-5', wordNoHarakat: 'أمانته', wordWithHarakat: 'أَمَانَتَهُ', transliteration: 'amānatahu', translationFr: 'sa loyauté / son intégrité', root: 'أ-م-ن', grammarNote: 'Nom coordonné accusatif + pronom possessif' }
+      { id: 't2n-1', wordNoHarakat: 'أيها', wordWithHarakat: 'أَيُّهَا', transliteration: 'ayyuhā', translationFr: 'Ô (particule d\'interpellation)', root: 'أ-ي-ي', grammarNote: 'Interpellatif pour nom défini (منادى مبني على الضم)' },
+      { id: 't2n-2', wordNoHarakat: 'الملك،', wordWithHarakat: 'المَلِكُ،', transliteration: 'al-Maliku', translationFr: 'le Roi', root: 'م-ل-ك', grammarNote: 'Apposition nominative après ayyuhā (نعت مرفوع)' },
+      { id: 't2n-3', wordNoHarakat: 'كنا', wordWithHarakat: 'كُنَّا', transliteration: 'kunnā', translationFr: 'nous étions', root: 'ك-و-ن', grammarNote: 'Kāna + pronom sujet (نحن)' },
+      { id: 't2n-4', wordNoHarakat: 'قوما', wordWithHarakat: 'قَوْمًا', transliteration: 'qawman', translationFr: 'un peuple', root: 'ق-و-م', grammarNote: 'Attribut de kāna accusatif (خبر كان منصوب)' },
+      { id: 't2n-5', wordNoHarakat: 'أهل', wordWithHarakat: 'أَهْلَ', transliteration: 'ahla', translationFr: 'gens / partisans de', root: 'أ-ه-ل', grammarNote: 'Épithète accusative (نعت منصوب)' },
+      { id: 't2n-6', wordNoHarakat: 'جاهلية،', wordWithHarakat: 'جَاهِلِيَّةٍ،', transliteration: 'jāhiliyyatin', translationFr: 'l\'ignorance (préislamique)', root: 'ج-ه-ل', grammarNote: 'Complément de nom au génitif' },
+      { id: 't2n-7', wordNoHarakat: 'نعبد', wordWithHarakat: 'نَعْبُدُ', transliteration: 'na‘budu', translationFr: 'nous adorions', root: 'ع-ب-د', grammarNote: 'Verbe au présent nominatif (فعل مضارع مرفوع)' },
+      { id: 't2n-8', wordNoHarakat: 'الأصنام،', wordWithHarakat: 'الأَصْنَامَ،', transliteration: 'al-aṣnāma', translationFr: 'les idoles', root: 'ص-ن-م', grammarNote: 'Complément d\'objet direct (مفعول به منصوب)' },
+      { id: 't2n-9', wordNoHarakat: 'حتى', wordWithHarakat: 'حَتَّى', transliteration: 'ḥattā', translationFr: 'jusqu\'à ce que', root: 'ح-ت-ي', grammarNote: 'Conjonction temporelle' },
+      { id: 't2n-10', wordNoHarakat: 'بعث', wordWithHarakat: 'بَعَثَ', transliteration: 'ba‘atha', translationFr: 'envoya / suscita', root: 'ب-ع-ث', grammarNote: 'Verbe au passé (فعل ماض مبني على الفتح)' },
+      { id: 't2n-11', wordNoHarakat: 'الله', wordWithHarakat: 'اللَّهُ', transliteration: 'Allāhu', translationFr: 'Allah', root: 'إ-ل-ه', grammarNote: 'Sujet du verbe (فاعل مرفوع)' },
+      { id: 't2n-12', wordNoHarakat: 'إلينا', wordWithHarakat: 'إِلَيْنَا', transliteration: 'ilaynā', translationFr: 'vers nous', root: 'إ-ل-ي', grammarNote: 'Préposition ilā + pronom nā' },
+      { id: 't2n-13', wordNoHarakat: 'رسولا', wordWithHarakat: 'رَسُولًا', transliteration: 'rasūlan', translationFr: 'un Messager', root: 'ر-س-ل', grammarNote: 'Complément d\'objet direct (مفعول به منصوب)' },
+      { id: 't2n-14', wordNoHarakat: 'نعرف', wordWithHarakat: 'نَعْرِفُ', transliteration: 'na‘rifu', translationFr: 'nous connaissons', root: 'ع-ر-ف', grammarNote: 'Verbe au présent nominatif' },
+      { id: 't2n-15', wordNoHarakat: 'نسبه', wordWithHarakat: 'نَسَبَهُ', transliteration: 'nasabahu', translationFr: 'sa noble lignée', root: 'ن-س-ب', grammarNote: 'Complément d\'objet direct + pronom' },
+      { id: 't2n-16', wordNoHarakat: 'وصدقه', wordWithHarakat: 'وَصِدْقَهُ', transliteration: 'wa-ṣidqahu', translationFr: 'et sa véracité', root: 'ص-د-ق', grammarNote: 'Nom coordonné accusatif + pronom' },
+      { id: 't2n-17', wordNoHarakat: 'وأمانته.', wordWithHarakat: 'وَأَمَانَتَهُ.', transliteration: 'wa-amānatahu', translationFr: 'et sa loyauté', root: 'أ-م-ن', grammarNote: 'Nom coordonné accusatif + pronom' }
     ]
   },
   {
@@ -98,10 +141,27 @@ export const RELIGIOUS_TEXTS: ReligiousText[] = [
     translationFr: 'Nul n\'a jamais mangé de meilleure nourriture que celle acquise par le labeur de ses propres mains ; et le Prophète de Dieu David mangeait du produit de son travail.',
     contextOrBenefit: 'Tome 2 & Sahih Al-Bukhari. Louange de l\'effort personnel et autonomie financière par rapport à la mendicité.',
     words: [
-      { id: 't2a-1', wordNoHarakat: 'أكل', wordWithHarakat: 'أَكَلَ', transliteration: 'akala', translationFr: 'il a mangé', root: 'أ-ك-ل', grammarNote: 'Verbe d\'action au passé' },
-      { id: 't2a-2', wordNoHarakat: 'أحد', wordWithHarakat: 'أَحَدٌ', transliteration: 'aḥadun', translationFr: 'quiconque / personne', root: 'أ-ح-د', grammarNote: 'Sujet du verbe marfū‘' },
-      { id: 't2a-3', wordNoHarakat: 'قط', wordWithHarakat: 'قَطُّ', transliteration: 'qaṭṭu', translationFr: 'jamais (dans le passé)', root: 'ق-ط-ط', grammarNote: 'Adverbe de temps passé invariable sur la Dammah' },
-      { id: 't2a-4', wordNoHarakat: 'يده', wordWithHarakat: 'يَدِهِ', transliteration: 'yadihi', translationFr: 'sa main', root: 'ي-د-ي', grammarNote: 'Génitif d\'annexion avec kasrah' }
+      { id: 't2a-1', wordNoHarakat: 'ما', wordWithHarakat: 'مَا', transliteration: 'mā', translationFr: 'ne... pas (négation du passé)', root: 'م-ا', grammarNote: 'Particule de négation (حرف نفي)' },
+      { id: 't2a-2', wordNoHarakat: 'أكل', wordWithHarakat: 'أَكَلَ', transliteration: 'akala', translationFr: 'a mangé', root: 'أ-ك-ل', grammarNote: 'Verbe au passé' },
+      { id: 't2a-3', wordNoHarakat: 'أحد', wordWithHarakat: 'أَحَدٌ', transliteration: 'aḥadun', translationFr: 'personne / quiconque', root: 'أ-ح-د', grammarNote: 'Sujet nominatif (فاعل مرفوع)' },
+      { id: 't2a-4', wordNoHarakat: 'طعاما', wordWithHarakat: 'طَعَامًا', transliteration: 'ṭa‘āman', translationFr: 'une nourriture', root: 'ط-ع-م', grammarNote: 'Complément d\'objet direct accusatif' },
+      { id: 't2a-5', wordNoHarakat: 'قط', wordWithHarakat: 'قَطُّ', transliteration: 'qaṭṭu', translationFr: 'jamais (dans le passé)', root: 'ق-ط-ط', grammarNote: 'Adverbe de temps passé invariable sur la Dammah' },
+      { id: 't2a-6', wordNoHarakat: 'خيرا', wordWithHarakat: 'خَيْرًا', transliteration: 'khayran', translationFr: 'meilleure', root: 'خ-ي-ر', grammarNote: 'Épithète de ṭa‘āman à l\'accusatif' },
+      { id: 't2a-7', wordNoHarakat: 'من', wordWithHarakat: 'مِنْ', transliteration: 'min', translationFr: 'que', root: 'م-ن', grammarNote: 'Préposition de comparaison' },
+      { id: 't2a-8', wordNoHarakat: 'أن', wordWithHarakat: 'أَنْ', transliteration: 'an', translationFr: 'de / le fait de', root: 'أ-ن', grammarNote: 'Particule du subjonctif (حرف مصدر ونصب)' },
+      { id: 't2a-9', wordNoHarakat: 'يأكل', wordWithHarakat: 'يَأْكُلَ', transliteration: 'ya’kula', translationFr: 'manger', root: 'أ-ك-ل', grammarNote: 'Verbe au subjonctif après an (منصوب بالفتحة)' },
+      { id: 't2a-10', wordNoHarakat: 'من', wordWithHarakat: 'مِنْ', transliteration: 'min', translationFr: 'du fruit de', root: 'م-ن', grammarNote: 'Préposition (حرف جر)' },
+      { id: 't2a-11', wordNoHarakat: 'عمل', wordWithHarakat: 'عَمَلِ', transliteration: '‘amali', translationFr: 'le travail', root: 'ع-م-ل', grammarNote: 'Nom au génitif après min' },
+      { id: 't2a-12', wordNoHarakat: 'يده،', wordWithHarakat: 'يَدِهِ،', transliteration: 'yadihi', translationFr: 'sa main', root: 'ي-د-ي', grammarNote: 'Génitif d\'annexion + pronom' },
+      { id: 't2a-13', wordNoHarakat: 'وإن', wordWithHarakat: 'وَإِنَّ', transliteration: 'wa-inna', translationFr: 'et certes', root: 'إ-ن-ن', grammarNote: 'Particule d\'emphase imposant l\'accusatif à son sujet' },
+      { id: 't2a-14', wordNoHarakat: 'نبي', wordWithHarakat: 'نَبِيَّ', transliteration: 'nabiyya', translationFr: 'le Prophète', root: 'ن-ب-أ', grammarNote: 'Nom d\'inna à l\'accusatif (اسم إن منصوب)' },
+      { id: 't2a-15', wordNoHarakat: 'الله', wordWithHarakat: 'اللَّهِ', transliteration: 'Allāhi', translationFr: 'd\'Allah', root: 'إ-ل-ه', grammarNote: 'Complément du nom au génitif' },
+      { id: 't2a-16', wordNoHarakat: 'داود', wordWithHarakat: 'دَاوُدَ', transliteration: 'Dāwūda', translationFr: 'David', root: 'د-و-د', grammarNote: 'Apposition diptote sans tanwīn' },
+      { id: 't2a-17', wordNoHarakat: 'كان', wordWithHarakat: 'كَانَ', transliteration: 'kāna', translationFr: 'avait l\'habitude de', root: 'ك-و-ن', grammarNote: 'Verbe auxiliaire du passé' },
+      { id: 't2a-18', wordNoHarakat: 'يأكل', wordWithHarakat: 'يَأْكُلُ', transliteration: 'ya’kulu', translationFr: 'manger', root: 'أ-ك-ل', grammarNote: 'Présent nominatif (خبر كان)' },
+      { id: 't2a-19', wordNoHarakat: 'من', wordWithHarakat: 'مِنْ', transliteration: 'min', translationFr: 'du fruit de', root: 'م-ن', grammarNote: 'Préposition' },
+      { id: 't2a-20', wordNoHarakat: 'عمل', wordWithHarakat: 'عَمَلِ', transliteration: '‘amali', translationFr: 'le labeur de', root: 'ع-م-ل', grammarNote: 'Génitif après min' },
+      { id: 't2a-21', wordNoHarakat: 'يده.', wordWithHarakat: 'يَدِهِ.', transliteration: 'yadihi', translationFr: 'sa main', root: 'ي-د-ي', grammarNote: 'Génitif d\'annexion + pronom' }
     ]
   },
 
@@ -119,10 +179,76 @@ export const RELIGIOUS_TEXTS: ReligiousText[] = [
     translationFr: 'Tahir se réveille à l\'aube, accomplit ses ablutions à la maison, puis marche vers la mosquée et récite le Noble Coran après la prière.',
     contextOrBenefit: 'Tome 1. Modèle de dialogue du quotidien combinant verbes d\'action au présent et prépositions courantes.',
     words: [
-      { id: 't1d-1', wordNoHarakat: 'يستيقظ', wordWithHarakat: 'يَسْتَيْقِظُ', transliteration: 'yastayqidhu', translationFr: 'il se réveille', root: 'ي-ق-ظ', grammarNote: 'Verbe au présent de la forme X (استفعل)' },
-      { id: 't1d-2', wordNoHarakat: 'طاهر', wordWithHarakat: 'طَاهِرٌ', transliteration: 'Ṭāhirun', translationFr: 'Tahir (nom propre)', root: 'ط-ه-ر', grammarNote: 'Sujet nominatif avec tanwin' },
-      { id: 't1d-3', wordNoHarakat: 'فيتوضأ', wordWithHarakat: 'فَيَتَوَضَّأُ', transliteration: 'fa-yatawaḍḍa’u', translationFr: 'puis il fait ses ablutions', root: 'و-ض-أ', grammarNote: 'Forme V réflexive au présent' },
-      { id: 't1d-4', wordNoHarakat: 'المسجد', wordWithHarakat: 'المَسْجِدِ', transliteration: 'al-masjidi', translationFr: 'la mosquée', root: 'س-ج-د', grammarNote: 'Nom de lieu au cas génitif après ilā' }
+      { id: 't1d-1', wordNoHarakat: 'يستيقظ', wordWithHarakat: 'يَسْتَيْقِظُ', transliteration: 'yastayqiẓu', translationFr: 'il se réveille', root: 'ي-ق-ظ', grammarNote: 'Verbe au présent de la forme X (استفعل) nominatif' },
+      { id: 't1d-2', wordNoHarakat: 'طاهر', wordWithHarakat: 'طَاهِرٌ', transliteration: 'Ṭāhirun', translationFr: 'Tahir (prénom)', root: 'ط-ه-ر', grammarNote: 'Sujet nominatif avec tanwīn ḍamm (فاعل مرفوع)' },
+      { id: 't1d-3', wordNoHarakat: 'عند', wordWithHarakat: 'عِنْدَ', transliteration: '‘inda', translationFr: 'à / au moment de', root: 'ع-ن-د', grammarNote: 'Adverbe de temps accusatif (ظرف زمان منصوب)' },
+      { id: 't1d-4', wordNoHarakat: 'الفجر،', wordWithHarakat: 'الفَجْرِ،', transliteration: 'al-fajri', translationFr: 'l\'aube', root: 'ف-ج-ر', grammarNote: 'Complément d\'annexion au génitif (مضاف إليه مجرور)' },
+      { id: 't1d-5', wordNoHarakat: 'فيتوضأ', wordWithHarakat: 'فَيَتَوَضَّأُ', transliteration: 'fa-yatawaḍḍa’u', translationFr: 'puis il fait ses ablutions', root: 'و-ض-أ', grammarNote: 'Conjonction fa- + verbe présent forme V nominatif' },
+      { id: 't1d-6', wordNoHarakat: 'في', wordWithHarakat: 'فِي', transliteration: 'fī', translationFr: 'dans', root: 'ف-ي', grammarNote: 'Préposition (حرف جر)' },
+      { id: 't1d-7', wordNoHarakat: 'البيت،', wordWithHarakat: 'البَيْتِ،', transliteration: 'al-bayti', translationFr: 'la maison', root: 'ب-ي-ت', grammarNote: 'Nom au génitif après fī (اسم مجرور بالكسرة)' },
+      { id: 't1d-8', wordNoHarakat: 'ثم', wordWithHarakat: 'ثُمَّ', transliteration: 'thumma', translationFr: 'ensuite', root: 'ث-م', grammarNote: 'Conjonction de succession (حرف عطف)' },
+      { id: 't1d-9', wordNoHarakat: 'يمشي', wordWithHarakat: 'يَمْشِي', transliteration: 'yamshī', translationFr: 'il marche', root: 'م-ش-ي', grammarNote: 'Verbe défectueux au présent (فعل مضارع مرفوع بضمة مقدرة)' },
+      { id: 't1d-10', wordNoHarakat: 'إلى', wordWithHarakat: 'إِلَى', transliteration: 'ilā', translationFr: 'vers', root: 'إ-ل-ي', grammarNote: 'Préposition de direction (حرف جر)' },
+      { id: 't1d-11', wordNoHarakat: 'المسجد،', wordWithHarakat: 'المَسْجِدِ،', transliteration: 'al-masjidi', translationFr: 'la mosquée', root: 'س-ج-د', grammarNote: 'Nom de lieu au génitif après ilā (مجرور بالكسرة)' },
+      { id: 't1d-12', wordNoHarakat: 'ويقرأ', wordWithHarakat: 'وَيَقْرَأُ', transliteration: 'wa-yaqra’u', translationFr: 'et il récite / lit', root: 'ق-ر-أ', grammarNote: 'Verbe au présent nominatif (مرفوع بالضمة)' },
+      { id: 't1d-13', wordNoHarakat: 'القرآن', wordWithHarakat: 'القُرْآنَ', transliteration: 'al-Qur’āna', translationFr: 'le Coran', root: 'ق-ر-أ', grammarNote: 'Complément d\'objet direct (مفعول به منصوب)' },
+      { id: 't1d-14', wordNoHarakat: 'الكريم', wordWithHarakat: 'الكَرِيمَ', transliteration: 'al-Karīma', translationFr: 'le Noble', root: 'ك-ر-م', grammarNote: 'Épithète accusative suivant القُرْآنَ (نعت منصوب)' },
+      { id: 't1d-15', wordNoHarakat: 'بعد', wordWithHarakat: 'بَعْدَ', transliteration: 'ba‘da', translationFr: 'après', root: 'ب-ع-د', grammarNote: 'Adverbe de temps accusatif (ظرف زمان منصوب)' },
+      { id: 't1d-16', wordNoHarakat: 'الصلاة.', wordWithHarakat: 'الصَّلَاةِ.', transliteration: 'aṣ-ṣalāti', translationFr: 'la prière', root: 'ص-ل-و', grammarNote: 'Complément d\'annexion au génitif (مضاف إليه مجرور)' }
+    ]
+  },
+  {
+    id: 'tome1-greetings',
+    title: 'Les Salutations et la Présentation (التحية والتعارف)',
+    arabicTitle: 'أَنَا طَالِبٌ فِي الجَامِعَةِ الإِسْلَامِيَّة',
+    category: 'tome1',
+    volumeSource: 'tome1',
+    source: 'Tome 1 - Unité 1 (التحية والتعارف, p. 5)',
+    difficulty: 'Débutant+',
+    arabicWithHarakat: 'السَّلَامُ عَلَيْكُمْ، اسْمِي خَالِدٌ، أَنَا مِنْ تُرْكِيَا، وَأَنَا طَالِبٌ فِي الجَامِعَةِ الإِسْلَامِيَّةِ.',
+    arabicWithoutHarakat: 'السلام عليكم، اسمي خالد، أنا من تركيا، وأنا طالب في الجامعة الإسلامية.',
+    translationFr: 'Que la paix soit sur vous ! Je m\'appelle Khalid, je viens de Turquie et je suis étudiant à l\'Université Islamique.',
+    contextOrBenefit: 'Tome 1 - Unité 1. Phrases nominales de base (Mubtada et Khabar) et présentation personnelle.',
+    words: [
+      { id: 't1g-1', wordNoHarakat: 'السلام', wordWithHarakat: 'السَّلَامُ', transliteration: 'as-salāmu', translationFr: 'la paix', root: 'س-ل-م', grammarNote: 'Sujet nominal (مبتدأ مرفوع بالضمة)' },
+      { id: 't1g-2', wordNoHarakat: 'عليكم،', wordWithHarakat: 'عَلَيْكُمْ،', transliteration: '‘alaykum', translationFr: 'sur vous', root: 'ع-ل-ي', grammarNote: 'Préposition ‘alā + pronom pluriel (خبر شبه جملة)' },
+      { id: 't1g-3', wordNoHarakat: 'اسمي', wordWithHarakat: 'اسْمِي', transliteration: 'ismī', translationFr: 'mon nom', root: 'س-م-و', grammarNote: 'Sujet + pronom possessif yā’ (مبتدأ)' },
+      { id: 't1g-4', wordNoHarakat: 'خالد،', wordWithHarakat: 'خَالِدٌ،', transliteration: 'Khālidun', translationFr: 'Khalid', root: 'خ-ل-د', grammarNote: 'Prédicat nominatif avec tanwīn (خبر مرفوع)' },
+      { id: 't1g-5', wordNoHarakat: 'أنا', wordWithHarakat: 'أَنَا', transliteration: 'anā', translationFr: 'je / moi', root: 'أ-ن-ا', grammarNote: 'Pronom personnel isolé sujet' },
+      { id: 't1g-6', wordNoHarakat: 'من', wordWithHarakat: 'مِنْ', transliteration: 'min', translationFr: 'de / originaire de', root: 'م-ن', grammarNote: 'Préposition de provenance (حرف جر)' },
+      { id: 't1g-7', wordNoHarakat: 'تركيا،', wordWithHarakat: 'تُرْكِيَا،', transliteration: 'Turkiyā', translationFr: 'Turquie', root: 'ت-ر-ك', grammarNote: 'Nom propre invariable terminé par alif' },
+      { id: 't1g-8', wordNoHarakat: 'وأنا', wordWithHarakat: 'وَأَنَا', transliteration: 'wa-anā', translationFr: 'et moi', root: 'أ-ن-ا', grammarNote: 'Conjonction + pronom sujet' },
+      { id: 't1g-9', wordNoHarakat: 'طالب', wordWithHarakat: 'طَالِبٌ', transliteration: 'ṭālibun', translationFr: 'un étudiant', root: 'ط-ل-ب', grammarNote: 'Prédicat nominatif indéfini (خبر مرفوع)' },
+      { id: 't1g-10', wordNoHarakat: 'في', wordWithHarakat: 'فِي', transliteration: 'fī', translationFr: 'à / dans', root: 'ف-ي', grammarNote: 'Préposition (حرف جر)' },
+      { id: 't1g-11', wordNoHarakat: 'الجامعة', wordWithHarakat: 'الجَامِعَةِ', transliteration: 'al-jāmi‘ati', translationFr: 'l\'université', root: 'ج-م-ع', grammarNote: 'Nom au génitif après fī (مجرور بالكسرة)' },
+      { id: 't1g-12', wordNoHarakat: 'الإسلامية.', wordWithHarakat: 'الإِسْلَامِيَّةِ.', transliteration: 'al-islāmiyyati', translationFr: 'islamique', root: 'س-ل-م', grammarNote: 'Épithète féminine au génitif (نعت مجرور)' }
+    ]
+  },
+  {
+    id: 'tome1-housing',
+    title: 'Décrire son Logement (السكن في حي الجامعة)',
+    arabicTitle: 'أَسْكُنُ فِي شَقَّةٍ جَمِيلَةٍ فِي حَيِّ الجَامِعَة',
+    category: 'tome1',
+    volumeSource: 'tome1',
+    source: 'Tome 1 - Unité 3 (السكن, p. 49)',
+    difficulty: 'Débutant+',
+    arabicWithHarakat: 'أَسْكُنُ فِي حَيِّ الجَامِعَةِ فِي شَقَّةٍ جَمِيلَةٍ تَتَكَوَّنُ مِنْ خَمْسِ غُرَفٍ وَمَطْبَخٍ.',
+    arabicWithoutHarakat: 'أسكن في حي الجامعة في شقة جميلة تتكون من خمس غرف ومطبخ.',
+    translationFr: 'J\'habite dans le quartier de l\'université, dans un bel appartement composé de cinq pièces et d\'une cuisine.',
+    contextOrBenefit: 'Tome 1 - Unité 3. Emploi des nombres (de 3 à 10, accord inversé en genre) et description spatiale.',
+    words: [
+      { id: 't1h-1', wordNoHarakat: 'أسكن', wordWithHarakat: 'أَسْكُنُ', transliteration: 'askunu', translationFr: 'j\'habite', root: 'س-ك-ن', grammarNote: 'Verbe au présent 1ère pers. sing. (مرفوع)' },
+      { id: 't1h-2', wordNoHarakat: 'في', wordWithHarakat: 'فِي', transliteration: 'fī', translationFr: 'dans', root: 'ف-ي', grammarNote: 'Préposition (حرف جر)' },
+      { id: 't1h-3', wordNoHarakat: 'حي', wordWithHarakat: 'حَيِّ', transliteration: 'ḥayyi', translationFr: 'le quartier de', root: 'ح-ي-ي', grammarNote: 'Génitif sans tanwīn car annexé à الجَامِعَة' },
+      { id: 't1h-4', wordNoHarakat: 'الجامعة', wordWithHarakat: 'الجَامِعَةِ', transliteration: 'al-jāmi‘ati', translationFr: 'l\'université', root: 'ج-م-ع', grammarNote: 'Complément d\'annexion au génitif' },
+      { id: 't1h-5', wordNoHarakat: 'في', wordWithHarakat: 'فِي', transliteration: 'fī', translationFr: 'dans', root: 'ف-ي', grammarNote: 'Préposition (حرف جر)' },
+      { id: 't1h-6', wordNoHarakat: 'شقة', wordWithHarakat: 'شَقَّةٍ', transliteration: 'shaqqatin', translationFr: 'un appartement', root: 'ش-ق-ق', grammarNote: 'Nom indéfini au génitif avec tanwīn' },
+      { id: 't1h-7', wordNoHarakat: 'جميلة', wordWithHarakat: 'جَمِيلَةٍ', transliteration: 'jamīlatin', translationFr: 'bel / joli', root: 'ج-م-ل', grammarNote: 'Épithète génitive indéfinie (نعت مجرور)' },
+      { id: 't1h-8', wordNoHarakat: 'تتكون', wordWithHarakat: 'تَتَكَوَّنُ', transliteration: 'tatakawwanu', translationFr: 'il se compose', root: 'ك-و-ن', grammarNote: 'Verbe forme V (تفعّل) au présent' },
+      { id: 't1h-9', wordNoHarakat: 'من', wordWithHarakat: 'مِنْ', transliteration: 'min', translationFr: 'de', root: 'م-ن', grammarNote: 'Préposition (حرف جر)' },
+      { id: 't1h-10', wordNoHarakat: 'خمس', wordWithHarakat: 'خَمْسِ', transliteration: 'khamsi', translationFr: 'cinq', root: 'خ-م-س', grammarNote: 'Nombre au masculin car غُرَف (sing. غُرْفَة) est féminin' },
+      { id: 't1h-11', wordNoHarakat: 'غرف', wordWithHarakat: 'غُرَفٍ', transliteration: 'ghurafin', translationFr: 'pièces / chambres', root: 'غ-ر-ف', grammarNote: 'Pluriel au génitif d\'annexion après 3-10' },
+      { id: 't1h-12', wordNoHarakat: 'ومطبخ.', wordWithHarakat: 'وَمَطْبَخٍ.', transliteration: 'wa-maṭbakhin', translationFr: 'et une cuisine', root: 'ط-ب-خ', grammarNote: 'Nom de lieu coordonné au génitif' }
     ]
   },
 
@@ -135,19 +261,19 @@ export const RELIGIOUS_TEXTS: ReligiousText[] = [
     volumeSource: 'quran_hadith',
     source: 'Sahih Al-Bukhari (1) & Sahih Muslim (1907)',
     difficulty: 'Intermédiaire',
-    arabicWithHarakat: 'إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى',
-    arabicWithoutHarakat: 'إنما الأعمال بالنيات وإنما لكل امرئ ما نوى',
+    arabicWithHarakat: 'إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى.',
+    arabicWithoutHarakat: 'إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى.',
     translationFr: 'Les actions ne valent que par les intentions qui les animent, et chacun ne recevra la rétribution que de ce qu\'il a eu le dessein d\'accomplir.',
     contextOrBenefit: 'Pilier fondamental de la jurisprudence et de la spiritualité islamique. L\'imam Ash-Shafi\'i a dit qu\'il constitue à lui seul le tiers de la science.',
     words: [
       { id: 'hn-1', wordNoHarakat: 'إنما', wordWithHarakat: 'إِنَّمَا', transliteration: 'Innamā', translationFr: 'Certes / seulement (particule de restriction)', root: 'ن-م-ي', grammarNote: 'Outil de restriction (أداة حصر)' },
       { id: 'hn-2', wordNoHarakat: 'الأعمال', wordWithHarakat: 'الأَعْمَالُ', transliteration: 'al-a‘mālu', translationFr: 'les actions / les œuvres', root: 'ع-م-ل', grammarNote: 'Sujet (مبتدأ مرفوع بالضمة)' },
-      { id: 'hn-3', wordNoHarakat: 'بالنيات', wordWithHarakat: 'بِالنِّيَّاتِ', transliteration: 'bin-niyyāt', translationFr: 'par les intentions', root: 'ن-و-ي', grammarNote: 'Préposition + nom au génitif (جار ومجرور)' },
+      { id: 'hn-3', wordNoHarakat: 'بالنيات،', wordWithHarakat: 'بِالنِّيَّاتِ،', transliteration: 'bin-niyyāt', translationFr: 'par les intentions', root: 'ن-و-ي', grammarNote: 'Préposition + nom au génitif (جار ومجرور)' },
       { id: 'hn-4', wordNoHarakat: 'وإنما', wordWithHarakat: 'وَإِنَّمَا', transliteration: 'wa-innamā', translationFr: 'et assurément', root: 'ن-م-ي', grammarNote: 'Conjonction + restriction' },
-      { id: 'hn-5', wordNoHarakat: 'لكل', wordWithHarakat: 'لِكُلِّ', transliteration: 'li-kulli', translationFr: 'pour chaque / tout', root: 'ك-ل-ل', grammarNote: 'Préposition de destination' },
+      { id: 'hn-5', wordNoHarakat: 'لكل', wordWithHarakat: 'لِكُلِّ', transliteration: 'li-kulli', translationFr: 'pour chaque / tout', root: 'ك-ل-ل', grammarNote: 'Préposition de destination + génitif' },
       { id: 'hn-6', wordNoHarakat: 'امرئ', wordWithHarakat: 'امْرِئٍ', transliteration: 'imri’in', translationFr: 'homme / personne', root: 'م-ر-ء', grammarNote: 'Complément du nom au génitif (مضاف إليه)' },
       { id: 'hn-7', wordNoHarakat: 'ما', wordWithHarakat: 'مَا', transliteration: 'mā', translationFr: 'ce que', root: 'م-و-ي', grammarNote: 'Pronom relatif (اسم موصول)' },
-      { id: 'hn-8', wordNoHarakat: 'نوى', wordWithHarakat: 'نَوَى', transliteration: 'nawā', translationFr: 'il a eu l\'intention', root: 'ن-و-ي', grammarNote: 'Verbe au passé (فعل ماض مبني على الفتح المقدر)' }
+      { id: 'hn-8', wordNoHarakat: 'نوى.', wordWithHarakat: 'نَوَى.', transliteration: 'nawā', translationFr: 'il a eu l\'intention', root: 'ن-و-ي', grammarNote: 'Verbe au passé (فعل ماض مبني على الفتح المقدر)' }
     ]
   },
   {
@@ -158,8 +284,8 @@ export const RELIGIOUS_TEXTS: ReligiousText[] = [
     volumeSource: 'quran_hadith',
     source: 'Sourate Al-Baqarah (2:255)',
     difficulty: 'Avancé',
-    arabicWithHarakat: 'اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ',
-    arabicWithoutHarakat: 'الله لا إله إلا هو الحي القيوم لا تأخذه سنة ولا نوم',
+    arabicWithHarakat: 'اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ، لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ.',
+    arabicWithoutHarakat: 'الله لا إله إلا هو الحي القيوم، لا تأخذه سنة ولا نوم.',
     translationFr: 'Allah ! Point de divinité à part Lui, le Vivant, Celui qui subsiste par Lui-même. Ni somnolence ni sommeil ne Le saisissent.',
     contextOrBenefit: 'Le plus grand verset du Coran selon le Prophète (ﷺ), proclamant la transcendance absolue et la perfection divine.',
     words: [
@@ -168,8 +294,13 @@ export const RELIGIOUS_TEXTS: ReligiousText[] = [
       { id: 'ak-3', wordNoHarakat: 'إله', wordWithHarakat: 'إِلَٰهَ', transliteration: 'ilāha', translationFr: 'divinité digne d\'adoration', root: 'إ-ل-ه', grammarNote: 'Nom régi par la négation absolue (مبني على الفتح)' },
       { id: 'ak-4', wordNoHarakat: 'إلا', wordWithHarakat: 'إِلَّا', transliteration: 'illā', translationFr: 'excepté / sauf', root: 'أ-ل-ل', grammarNote: 'Particule d\'exception (أداة استثناء)' },
       { id: 'ak-5', wordNoHarakat: 'هو', wordWithHarakat: 'هُوَ', transliteration: 'huwa', translationFr: 'Lui', root: 'ه-و-ي', grammarNote: 'Pronom personnel isolé (ضمير منفصل)' },
-      { id: 'ak-6', wordNoHarakat: 'الحي', wordWithHarakat: 'الْحَيُّ', transliteration: 'al-ḥayyu', translationFr: 'Le Vivant (éternel sans commencement ni fin)', root: 'ح-ي-ي', grammarNote: 'Attribut divin (خبر أو نعت مرفوع)' },
-      { id: 'ak-7', wordNoHarakat: 'القيوم', wordWithHarakat: 'الْقَيُّومُ', transliteration: 'al-qayyūmu', translationFr: 'Celui qui subsiste par Lui-même', root: 'ق-و-م', grammarNote: 'Attribut divin marfū‘' }
+      { id: 'ak-6', wordNoHarakat: 'الحي', wordWithHarakat: 'الْحَيُّ', transliteration: 'al-ḥayyu', translationFr: 'Le Vivant', root: 'ح-ي-ي', grammarNote: 'Attribut divin (خبر ثان أو نعت مرفوع)' },
+      { id: 'ak-7', wordNoHarakat: 'القيوم،', wordWithHarakat: 'الْقَيُّومُ،', transliteration: 'al-qayyūmu', translationFr: 'Celui qui subsiste par Lui-même', root: 'ق-و-م', grammarNote: 'Attribut divin marfū‘' },
+      { id: 'ak-8', wordNoHarakat: 'لا', wordWithHarakat: 'لَا', transliteration: 'lā', translationFr: 'ne... pas', root: 'ل-و-ي', grammarNote: 'Particule de négation du verbe présent' },
+      { id: 'ak-9', wordNoHarakat: 'تأخذه', wordWithHarakat: 'تَأْخُذُهُ', transliteration: 'ta’khudhuhu', translationFr: 'Le saisit', root: 'أ-خ-ذ', grammarNote: 'Verbe au présent nominatif + pronom COD' },
+      { id: 'ak-10', wordNoHarakat: 'سنة', wordWithHarakat: 'سِنَةٌ', transliteration: 'sinatun', translationFr: 'somnolence / assoupissement', root: 'و-س-ن', grammarNote: 'Sujet nominatif (فاعل مرفوع بالضمة)' },
+      { id: 'ak-11', wordNoHarakat: 'ولا', wordWithHarakat: 'وَلَا', transliteration: 'wa-lā', translationFr: 'ni', root: 'ل-و-ي', grammarNote: 'Conjonction + négation d\'insistance' },
+      { id: 'ak-12', wordNoHarakat: 'نوم.', wordWithHarakat: 'نَوْمٌ.', transliteration: 'nawmun', translationFr: 'sommeil profond', root: 'ن-و-م', grammarNote: 'Sujet coordonné nominatif (معطوف مرفوع)' }
     ]
   },
   {
@@ -180,15 +311,22 @@ export const RELIGIOUS_TEXTS: ReligiousText[] = [
     volumeSource: 'quran_hadith',
     source: 'Hadith de Jibril - Sahih Muslim (8)',
     difficulty: 'Intermédiaire',
-    arabicWithHarakat: 'أَنْ تَعْبُدَ اللَّهَ كَأَنَّكَ تَرَاهُ، فَإِنْ لَمْ تَكُنْ تَرَاهُ فَإِنَّهُ يَرَاكَ',
-    arabicWithoutHarakat: 'أن تعبد الله كأنك تراه، فإن لم تكن تراه فإنه يراك',
+    arabicWithHarakat: 'أَنْ تَعْبُدَ اللَّهَ كَأَنَّكَ تَرَاهُ، فَإِنْ لَمْ تَكُنْ تَرَاهُ فَإِنَّهُ يَرَاكَ.',
+    arabicWithoutHarakat: 'أن تعبد الله كأنك تراه، فإن لم تكن تراه فإنه يراك.',
     translationFr: 'C\'est que tu adores Allah comme si tu Le voyais, car si tu ne Le vois pas, certes Lui te voit.',
     contextOrBenefit: 'Le degré suprême de la foi, unissant la présence du cœur, la dévotion sincère et la vigilance constante.',
     words: [
-      { id: 'hi-1', wordNoHarakat: 'تعبد', wordWithHarakat: 'تَعْبُدَ', transliteration: 'ta‘buda', translationFr: 'tu adores', root: 'ع-ب-د', grammarNote: 'Présent subjonctif après an' },
-      { id: 'hi-2', wordNoHarakat: 'الله', wordWithHarakat: 'اللَّهَ', transliteration: 'Allāha', translationFr: 'Allah', root: 'إ-ل-ه', grammarNote: 'Complément d\'objet direct accusatif' },
-      { id: 'hi-3', wordNoHarakat: 'تراه', wordWithHarakat: 'تَرَاهُ', transliteration: 'tarāhu', translationFr: 'tu Le voyais', root: 'ر-أ-ي', grammarNote: 'Verbe présent + pronom objet' },
-      { id: 'hi-4', wordNoHarakat: 'يراك', wordWithHarakat: 'يَرَاكَ', transliteration: 'yarāka', translationFr: 'Il te voit', root: 'ر-أ-ي', grammarNote: 'Verbe présent + pronom d\'adresse' }
+      { id: 'hi-1', wordNoHarakat: 'أن', wordWithHarakat: 'أَنْ', transliteration: 'an', translationFr: 'que (tu)', root: 'أ-ن', grammarNote: 'Particule du subjonctif (حرف مصدر ونصب)' },
+      { id: 'hi-2', wordNoHarakat: 'تعبد', wordWithHarakat: 'تَعْبُدَ', transliteration: 'ta‘buda', translationFr: 'tu adores', root: 'ع-ب-د', grammarNote: 'Présent subjonctif après an (منصوب بالفتحة)' },
+      { id: 'hi-3', wordNoHarakat: 'الله', wordWithHarakat: 'اللَّهَ', transliteration: 'Allāha', translationFr: 'Allah', root: 'إ-ل-ه', grammarNote: 'Complément d\'objet direct accusatif' },
+      { id: 'hi-4', wordNoHarakat: 'كأنك', wordWithHarakat: 'كَأَنَّكَ', transliteration: 'ka’annaka', translationFr: 'comme si tu', root: 'ك-أ-ن', grammarNote: 'Outil de comparaison (من أخوات إن) + pronom' },
+      { id: 'hi-5', wordNoHarakat: 'تراه،', wordWithHarakat: 'تَرَاهُ،', transliteration: 'tarāhu', translationFr: 'Le voyais', root: 'ر-أ-ي', grammarNote: 'Verbe présent + pronom objet' },
+      { id: 'hi-6', wordNoHarakat: 'فإن', wordWithHarakat: 'فَإِنْ', transliteration: 'fa-in', translationFr: 'car si', root: 'إ-ن', grammarNote: 'Particule conditionnelle apocopante' },
+      { id: 'hi-7', wordNoHarakat: 'لم', wordWithHarakat: 'لَمْ', transliteration: 'lam', translationFr: 'ne... pas', root: 'ل-م', grammarNote: 'Négation apocopante du verbe au présent' },
+      { id: 'hi-8', wordNoHarakat: 'تكن', wordWithHarakat: 'تَكُنْ', transliteration: 'takun', translationFr: 'tu n\'es', root: 'ك-و-ن', grammarNote: 'Kāna apocopé par lam (مجزوم بالسكون)' },
+      { id: 'hi-9', wordNoHarakat: 'تراه', wordWithHarakat: 'تَرَاهُ', transliteration: 'tarāhu', translationFr: 'en train de Le voir', root: 'ر-أ-ي', grammarNote: 'Verbe présent (خبر تكن)' },
+      { id: 'hi-10', wordNoHarakat: 'فإنه', wordWithHarakat: 'فَإِنَّهُ', transliteration: 'fa-innahu', translationFr: 'alors certes Lui', root: 'إ-ن-ن', grammarNote: 'Réponse à la condition + Inna + pronom' },
+      { id: 'hi-11', wordNoHarakat: 'يراك.', wordWithHarakat: 'يَرَاكَ.', transliteration: 'yarāka', translationFr: 'te voit', root: 'ر-أ-ي', grammarNote: 'Verbe présent + pronom d\'adresse' }
     ]
   },
   {
@@ -199,15 +337,19 @@ export const RELIGIOUS_TEXTS: ReligiousText[] = [
     volumeSource: 'quran_hadith',
     source: 'Sourate Al-Inshirah (94:5-6)',
     difficulty: 'Intermédiaire',
-    arabicWithHarakat: 'فَإِنَّ مَعَ الْعُسْرِ يُسْرًا • إِنَّ مَعَ الْعُسْرِ يُسْرًا',
-    arabicWithoutHarakat: 'فإن مع العسر يسرا • إن مع العسر يسرا',
+    arabicWithHarakat: 'فَإِنَّ مَعَ الْعُسْرِ يُسْرًا، إِنَّ مَعَ الْعُسْرِ يُسْرًا.',
+    arabicWithoutHarakat: 'فإن مع العسر يسرا، إن مع العسر يسرا.',
     translationFr: 'À côté de la difficulté est certes une facilité ! À côté de la difficulté est certes une facilité !',
     contextOrBenefit: 'Révélée pour consoler le Prophète. Les linguistes arabes font remarquer que la difficulté (Al-‘Usr) est définie avec "Al-", alors que la facilité (Yusran) est indéfinie.',
     words: [
       { id: 'si-1', wordNoHarakat: 'فإن', wordWithHarakat: 'فَإِنَّ', transliteration: 'fa-inna', translationFr: 'car certes / assurément', root: 'إ-ن-ن', grammarNote: 'Particule d\'affirmation catégorique' },
-      { id: 'si-2', wordNoHarakat: 'مع', wordWithHarakat: 'مَعَ', transliteration: 'ma‘a', translationFr: 'avec / au côté de', root: 'م-ع-ي', grammarNote: 'Adverbe de concomitance (ظرف)' },
+      { id: 'si-2', wordNoHarakat: 'مع', wordWithHarakat: 'مَعَ', transliteration: 'ma‘a', translationFr: 'avec / au côté de', root: 'م-ع-ي', grammarNote: 'Adverbe de concomitance (ظرف منصوب)' },
       { id: 'si-3', wordNoHarakat: 'العسر', wordWithHarakat: 'الْعُسْرِ', transliteration: 'al-‘usri', translationFr: 'la difficulté / l\'épreuve', root: 'ع-س-ر', grammarNote: 'Génitif défini (مضاف إليه مجرور)' },
-      { id: 'si-4', wordNoHarakat: 'يسرا', wordWithHarakat: 'يُسْرًا', transliteration: 'yusran', translationFr: 'une immense facilité', root: 'ي-س-ر', grammarNote: 'Nom d\'Inna accusatif (اسم إن مؤخر)' }
+      { id: 'si-4', wordNoHarakat: 'يسرا،', wordWithHarakat: 'يُسْرًا،', transliteration: 'yusran', translationFr: 'une immense facilité', root: 'ي-س-ر', grammarNote: 'Nom d\'Inna reporté accusatif (اسم إن مؤخر)' },
+      { id: 'si-5', wordNoHarakat: 'إن', wordWithHarakat: 'إِنَّ', transliteration: 'inna', translationFr: 'certes', root: 'إ-ن-ن', grammarNote: 'Particule d\'affirmation' },
+      { id: 'si-6', wordNoHarakat: 'مع', wordWithHarakat: 'مَعَ', transliteration: 'ma‘a', translationFr: 'avec', root: 'م-ع-ي', grammarNote: 'Adverbe de concomitance' },
+      { id: 'si-7', wordNoHarakat: 'العسر', wordWithHarakat: 'الْعُسْرِ', transliteration: 'al-‘usri', translationFr: 'la difficulté', root: 'ع-س-ر', grammarNote: 'Génitif défini' },
+      { id: 'si-8', wordNoHarakat: 'يسرا.', wordWithHarakat: 'يُسْرًا.', transliteration: 'yusran', translationFr: 'une facilité', root: 'ي-س-ر', grammarNote: 'Nom d\'Inna reporté accusatif' }
     ]
   },
   {
@@ -218,14 +360,20 @@ export const RELIGIOUS_TEXTS: ReligiousText[] = [
     volumeSource: 'quran_hadith',
     source: 'Rapporté par Ibn Majah (925)',
     difficulty: 'Intermédiaire',
-    arabicWithHarakat: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا',
-    arabicWithoutHarakat: 'اللهم إني أسألك علما نافعا ورزقا طيبا وعملا متقبلا',
+    arabicWithHarakat: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا.',
+    arabicWithoutHarakat: 'اللهم إني أسألك علما نافعا، ورزقا طيبا، وعملا متقبلا.',
     translationFr: 'Ô Allah, je Te demande une science bénéfique, une subsistance pure et agréable, et une œuvre agréée.',
     contextOrBenefit: 'Invocation matinale du Prophète (ﷺ) après la prière du Fajr.',
     words: [
-      { id: 'di-1', wordNoHarakat: 'اللهم', wordWithHarakat: 'اللَّهُمَّ', transliteration: 'Allāhumma', translationFr: 'Ô Allah', root: 'إ-ل-ه', grammarNote: 'Appel divin' },
-      { id: 'di-2', wordNoHarakat: 'علما', wordWithHarakat: 'عِلْمًا', transliteration: '‘ilman', translationFr: 'une science', root: 'ع-ل-م', grammarNote: 'Objet direct accusatif' },
-      { id: 'di-3', wordNoHarakat: 'نافعا', wordWithHarakat: 'نَافِعًا', transliteration: 'nāfi‘an', translationFr: 'bénéfique', root: 'ن-ف-ع', grammarNote: 'Épithète accusative' }
+      { id: 'di-1', wordNoHarakat: 'اللهم', wordWithHarakat: 'اللَّهُمَّ', transliteration: 'Allāhumma', translationFr: 'Ô Allah', root: 'إ-ل-ه', grammarNote: 'Appel divin (منادى مبني على الضم)' },
+      { id: 'di-2', wordNoHarakat: 'إني', wordWithHarakat: 'إِنِّي', transliteration: 'innī', translationFr: 'certes je', root: 'إ-ن-ن', grammarNote: 'Particule Inna + pronom yā’' },
+      { id: 'di-3', wordNoHarakat: 'أسألك', wordWithHarakat: 'أَسْأَلُكَ', transliteration: 'as’aluka', translationFr: 'je Te demande', root: 'س-أ-ل', grammarNote: 'Verbe au présent + pronom objet' },
+      { id: 'di-4', wordNoHarakat: 'علما', wordWithHarakat: 'عِلْمًا', transliteration: '‘ilman', translationFr: 'une science', root: 'ع-ل-م', grammarNote: 'Second objet direct accusatif' },
+      { id: 'di-5', wordNoHarakat: 'نافعا،', wordWithHarakat: 'نَافِعًا،', transliteration: 'nāfi‘an', translationFr: 'bénéfique', root: 'ن-ف-ع', grammarNote: 'Épithète accusative (نعت منصوب)' },
+      { id: 'di-6', wordNoHarakat: 'ورزقا', wordWithHarakat: 'وَرِزْقًا', transliteration: 'wa-rizqan', translationFr: 'et une subsistance', root: 'ر-ز-ق', grammarNote: 'Nom coordonné accusatif' },
+      { id: 'di-7', wordNoHarakat: 'طيبا،', wordWithHarakat: 'طَيِّبًا،', transliteration: 'ṭayyiban', translationFr: 'pure / licite', root: 'ط-ي-ب', grammarNote: 'Épithète accusative' },
+      { id: 'di-8', wordNoHarakat: 'وعملا', wordWithHarakat: 'وَعَمَلًا', transliteration: 'wa-‘amalan', translationFr: 'et une œuvre', root: 'ع-م-ل', grammarNote: 'Nom coordonné accusatif' },
+      { id: 'di-9', wordNoHarakat: 'متقبلا.', wordWithHarakat: 'مُتَقَبَّلًا.', transliteration: 'mutaqabbalan', translationFr: 'agréée (par Allah)', root: 'ق-ب-ل', grammarNote: 'Participe passif forme V accusatif (اسم مفعول)' }
     ]
   }
 ];

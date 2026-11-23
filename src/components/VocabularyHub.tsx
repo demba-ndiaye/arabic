@@ -1,22 +1,22 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { AdvancedVocabWord, UserProgress } from '../types/app';
 import { playArabicSpeech } from '../utils/audio';
 import { saveCustomWord, deleteCustomWord } from '../utils/storage';
-import { 
-  Search, 
-  RotateCw, 
-  Plus, 
-  Volume2, 
-  CheckCircle, 
-  Trash2, 
-  Sparkles, 
+import {
+  Search,
+  RotateCw,
+  Plus,
+  Volume2,
+  CheckCircle,
+  Trash2,
   BookMarked,
   Layers,
   ChevronLeft,
   ChevronRight,
   Shuffle,
   Eye,
-  EyeOff
+  EyeOff,
+  ArrowRight
 } from 'lucide-react';
 
 interface VocabularyHubProps {
@@ -25,6 +25,7 @@ interface VocabularyHubProps {
   progress: UserProgress;
   onUpdateProgress: (updated: UserProgress) => void;
   audioRate: number;
+  initialCategory?: string;
 }
 
 export const VocabularyHub: React.FC<VocabularyHubProps> = ({
@@ -32,16 +33,27 @@ export const VocabularyHub: React.FC<VocabularyHubProps> = ({
   onRefreshWords,
   progress,
   onUpdateProgress,
-  audioRate
+  audioRate,
+  initialCategory
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('Toutes');
+  const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory || 'Toutes');
   const [viewMode, setViewMode] = useState<'flashcards' | 'list'>('flashcards');
 
   // Flashcards state
   const [cardIndex, setCardIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [showHarakatOnFront, setShowHarakatOnFront] = useState(false);
+  const [justValidatedWordId, setJustValidatedWordId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (initialCategory) {
+      setSelectedCategory(initialCategory);
+      setCardIndex(0);
+      setIsFlipped(false);
+      setJustValidatedWordId(null);
+    }
+  }, [initialCategory]);
 
   // New word modal
   const [showAddModal, setShowAddModal] = useState(false);
@@ -88,23 +100,50 @@ export const VocabularyHub: React.FC<VocabularyHubProps> = ({
     });
   }, [words, selectedCategory, searchQuery]);
 
-  const currentWord: AdvancedVocabWord | undefined = filteredWords[cardIndex] || filteredWords[0];
+  const safeCardIndex = filteredWords.length > 0 ? cardIndex % filteredWords.length : 0;
+  const currentWord: AdvancedVocabWord | undefined = filteredWords[safeCardIndex];
+
+  const nextUnmasteredIndex = useMemo(() => {
+    if (filteredWords.length <= 1) return -1;
+    const after = filteredWords.findIndex(
+      (w, idx) => idx > safeCardIndex && !progress.totalWordsMastered.includes(w.id)
+    );
+    if (after !== -1) return after;
+    const before = filteredWords.findIndex(
+      (w, idx) => idx !== safeCardIndex && !progress.totalWordsMastered.includes(w.id)
+    );
+    return before;
+  }, [filteredWords, safeCardIndex, progress.totalWordsMastered]);
 
   const handleNextCard = () => {
     setIsFlipped(false);
     setShowHarakatOnFront(false);
+    setJustValidatedWordId(null);
     setCardIndex((prev) => (prev + 1) % (filteredWords.length || 1));
+  };
+
+  const handleNextUnmasteredOrNext = () => {
+    setIsFlipped(false);
+    setShowHarakatOnFront(false);
+    setJustValidatedWordId(null);
+    if (nextUnmasteredIndex !== -1) {
+      setCardIndex(nextUnmasteredIndex);
+    } else {
+      setCardIndex((prev) => (prev + 1) % (filteredWords.length || 1));
+    }
   };
 
   const handlePrevCard = () => {
     setIsFlipped(false);
     setShowHarakatOnFront(false);
+    setJustValidatedWordId(null);
     setCardIndex((prev) => (prev - 1 + filteredWords.length) % (filteredWords.length || 1));
   };
 
   const handleShuffle = () => {
     setIsFlipped(false);
     setShowHarakatOnFront(false);
+    setJustValidatedWordId(null);
     if (filteredWords.length > 1) {
       const rand = Math.floor(Math.random() * filteredWords.length);
       setCardIndex(rand);
@@ -121,9 +160,11 @@ export const VocabularyHub: React.FC<VocabularyHubProps> = ({
     if (isMastered) {
       updatedMastered = progress.totalWordsMastered.filter(id => id !== wordId);
       updatedLearning = [...progress.totalWordsLearning, wordId];
+      setJustValidatedWordId(null);
     } else {
       updatedMastered = [...progress.totalWordsMastered, wordId];
       updatedLearning = progress.totalWordsLearning.filter(id => id !== wordId);
+      setJustValidatedWordId(wordId);
     }
 
     onUpdateProgress({
@@ -132,6 +173,21 @@ export const VocabularyHub: React.FC<VocabularyHubProps> = ({
       totalWordsLearning: updatedLearning,
       dailyWordsReviewedToday: progress.dailyWordsReviewedToday + 1
     });
+  };
+
+  const handleValidateAndNextCard = () => {
+    if (!currentWord) return;
+    if (!progress.totalWordsMastered.includes(currentWord.id)) {
+      const updatedMastered = [...progress.totalWordsMastered, currentWord.id];
+      const updatedLearning = progress.totalWordsLearning.filter(id => id !== currentWord.id);
+      onUpdateProgress({
+        ...progress,
+        totalWordsMastered: updatedMastered,
+        totalWordsLearning: updatedLearning,
+        dailyWordsReviewedToday: progress.dailyWordsReviewedToday + 1
+      });
+    }
+    handleNextUnmasteredOrNext();
   };
 
   const handleCreateCustomWord = (e: React.FormEvent) => {
@@ -276,7 +332,7 @@ export const VocabularyHub: React.FC<VocabularyHubProps> = ({
                 {/* Meta header */}
                 <div className="flex items-center justify-between text-xs text-slate-500 px-2 font-display">
                   <span>
-                    Mot <strong className="text-slate-900 font-semibold">{cardIndex + 1}</strong> sur {filteredWords.length}
+                    Mot <strong className="text-slate-900 font-semibold">{safeCardIndex + 1}</strong> sur {filteredWords.length}
                   </span>
                   <span className="font-semibold text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded-full border border-indigo-100">
                     {currentWord.category}
@@ -403,16 +459,38 @@ export const VocabularyHub: React.FC<VocabularyHubProps> = ({
                   </div>
                 </div>
 
+                {/* Prompt shown immediately after validating a word */}
+                {justValidatedWordId === currentWord.id && filteredWords.length > 1 && (
+                  <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-in fade-in">
+                    <div className="flex items-center gap-2 text-xs text-emerald-900 font-medium">
+                      <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+                      <span>
+                        Mot <strong>« {currentWord.arabicWithHarakat} »</strong> validé ! Prêt pour le suivant ?
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={handleNextUnmasteredOrNext}
+                      className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 shadow-2xs transition-colors shrink-0"
+                    >
+                      <span>{nextUnmasteredIndex !== -1 ? 'Prochain mot à apprendre' : 'Passer au mot suivant'}</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                )}
+
                 {/* Navigation actions */}
-                <div className="flex items-center justify-between gap-3">
+                <div className="flex flex-wrap items-center justify-between gap-2.5">
                   <button
+                    type="button"
                     onClick={handlePrevCard}
-                    className="flex-1 py-3 px-4 bg-white border border-slate-200 hover:bg-slate-50 rounded-xl font-semibold text-slate-700 flex items-center justify-center gap-2 text-xs shadow-2xs transition-colors"
+                    className="py-3 px-4 bg-white border border-slate-200 hover:bg-slate-50 rounded-xl font-semibold text-slate-700 flex items-center justify-center gap-1.5 text-xs shadow-2xs transition-colors"
                   >
                     <ChevronLeft className="w-4 h-4" /> Précédent
                   </button>
 
                   <button
+                    type="button"
                     onClick={handleShuffle}
                     className="p-3 bg-white border border-slate-200 hover:bg-slate-50 rounded-xl text-slate-700 shadow-2xs transition-colors"
                     title="Mélanger aléatoirement"
@@ -420,11 +498,24 @@ export const VocabularyHub: React.FC<VocabularyHubProps> = ({
                     <Shuffle className="w-4 h-4 text-indigo-600" />
                   </button>
 
+                  {!isCurrentMastered && (
+                    <button
+                      type="button"
+                      onClick={handleValidateAndNextCard}
+                      className="flex-1 py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-semibold flex items-center justify-center gap-2 text-xs shadow-xs transition-colors"
+                    >
+                      <CheckCircle className="w-4 h-4" />
+                      <span>Valider & mot suivant</span>
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  )}
+
                   <button
+                    type="button"
                     onClick={handleNextCard}
                     className="flex-1 py-3 px-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-semibold flex items-center justify-center gap-2 text-xs shadow-xs transition-colors"
                   >
-                    Suivant <ChevronRight className="w-4 h-4" />
+                    <span>Mot suivant</span> <ChevronRight className="w-4 h-4" />
                   </button>
                 </div>
               </>
