@@ -33,7 +33,7 @@ export const TomesViewer: React.FC<TomesViewerProps> = ({
   const [selectedUnitId, setSelectedUnitId] = useState<string>('t3-u1');
   const [showUnitHarakat, setShowUnitHarakat] = useState<boolean>(true);
   const [showPdfEmbed, setShowPdfEmbed] = useState<boolean>(false);
-  const [audioRate, setAudioRate] = useState<number>(0.85);
+  const [audioRate] = useState<number>(0.85);
 
   const activeTome: TomePdfBook = TOMES_INFO.find(t => t.id === selectedTomeId) || TOMES_INFO[2];
 
@@ -51,9 +51,6 @@ export const TomesViewer: React.FC<TomesViewerProps> = ({
   const handlePlay = (text: string) => {
     playArabicSpeech(text, audioRate);
   };
-
-  // Google Docs viewer URL for embedded rendering
-  const googleDocsViewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(activeTome.pdfPath)}&embedded=true`;
 
   return (
     <div className="space-y-6">
@@ -123,10 +120,11 @@ export const TomesViewer: React.FC<TomesViewerProps> = ({
             </button>
             <a
               href={activeTome.pdfPath}
+              download
               target="_blank"
               rel="noopener noreferrer"
               className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold flex items-center gap-1.5 shadow-2xs transition-colors"
-              title="Ouvrir le fichier PDF officiel complet"
+              title="Télécharger ou ouvrir le fichier PDF officiel complet"
             >
               <Download className="w-3.5 h-3.5" /> Télécharger / Ouvrir le PDF
             </a>
@@ -299,13 +297,18 @@ export const TomesViewer: React.FC<TomesViewerProps> = ({
           </div>
 
           {showPdfEmbed && (
-            <div className="rounded-2xl overflow-hidden border border-slate-300 shadow-inner h-[650px] bg-slate-900 relative">
-              <iframe
-                src={googleDocsViewerUrl}
-                title={activeTome.title}
-                className="w-full h-full border-none"
-                allowFullScreen
-              />
+            <div className="space-y-2">
+              <div className="rounded-2xl overflow-hidden border border-slate-300 shadow-inner h-[650px] bg-slate-900 relative">
+                <iframe
+                  src={activeTome.pdfPath}
+                  title={activeTome.title}
+                  className="w-full h-full border-none bg-white"
+                  allowFullScreen
+                />
+              </div>
+              <p className="text-[11px] text-slate-500 text-right">
+                Si l'aperçu intégré ne s'affiche pas dans votre navigateur, utilisez le lien « Ouvrir le fichier PDF dans un nouvel onglet ».
+              </p>
             </div>
           )}
         </div>

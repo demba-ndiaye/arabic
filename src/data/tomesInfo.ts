@@ -8,8 +8,8 @@ export const TOMES_INFO: TomePdfBook[] = [
     subtitle: 'Niveau Élémentaire & Fondations de la communication',
     level: 'Fondations',
     description: 'Ce premier tome pose les bases orales et syntaxiques essentielles de la langue arabe : 16 unités thématiques abordant la salutation, la famille, le logement, la vie quotidienne, la nourriture, la prière, les études, le travail, le voyage et le pèlerinage.',
-    pdfPath: 'https://archive.org/download/arabiyyah-bayna-yadayk-volume-1/arabiyyah-bayna-yadayk-volume-1.pdf',
-    onlineReaderUrl: 'https://archive.org/embed/arabiyyah-bayna-yadayk-volume-1',
+    pdfPath: 'https://arabic.monapp.online/uploads/tome1.pdf',
+    onlineReaderUrl: 'https://arabic.monapp.online/uploads/tome1.pdf',
     pageCount: 402,
     keyUnits: [
       'التحية والتعارف (Salutations & Présentations)',
@@ -39,8 +39,8 @@ export const TOMES_INFO: TomePdfBook[] = [
     subtitle: 'Niveau Intermédiaire & Structuration de la langue',
     level: 'Intermédiaire',
     description: 'Ce second tome aborde des textes plus denses et réflexifs : santé, loisirs, mariage, vie urbaine, science, langue arabe, islam, jeunesse, sécurité et environnement. Il ancre la grammaire fonctionnelle appliquée.',
-    pdfPath: 'https://archive.org/download/arabiyyah-bayna-yadayk-volume-2/arabiyyah-bayna-yadayk-volume-2.pdf',
-    onlineReaderUrl: 'https://archive.org/embed/arabiyyah-bayna-yadayk-volume-2',
+    pdfPath: 'https://arabic.monapp.online/uploads/tome2%20.pdf',
+    onlineReaderUrl: 'https://arabic.monapp.online/uploads/tome2%20.pdf',
     pageCount: 444,
     keyUnits: [
       'العناية بالصحة (Santé & Médecine)',
@@ -69,8 +69,8 @@ export const TOMES_INFO: TomePdfBook[] = [
     subtitle: 'Niveau Avancé & Éloquence littéraire & coranique',
     level: 'Avancé',
     description: 'Le sommet de la méthode : textes littéraires intégraux, hadiths commentés, récits des prophètes, proverbes arabes préislamiques et islamiques (Amthāl), pièces de théâtre historique, et l\'intégralité des subtilités du Naḥw et du Ṣarf.',
-    pdfPath: 'https://archive.org/download/arabiyyah-bayna-yadayk-volume-3/arabiyyah-bayna-yadayk-volume-3.pdf',
-    onlineReaderUrl: 'https://archive.org/embed/arabiyyah-bayna-yadayk-volume-3',
+    pdfPath: 'https://arabic.monapp.online/uploads/tome3.pdf',
+    onlineReaderUrl: 'https://arabic.monapp.online/uploads/tome3.pdf',
     pageCount: 444,
     keyUnits: [
       'المعجزة الخالدة (Le Miracle du Coran)',
